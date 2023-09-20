@@ -11,3 +11,12 @@
 }
 
 */
+body {
+  @apply text-sm;
+}
+
+img {
+	@apply object-cover object-center;
+	image-rendering: high-quality;
+	font-size: 0;
+}
