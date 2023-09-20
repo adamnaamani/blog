@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'actiontext.css';
+
 /*
 
 @layer components {
@@ -19,4 +21,12 @@ img {
 	@apply object-cover object-center;
 	image-rendering: high-quality;
 	font-size: 0;
+}
+
+.btn {
+  @apply cursor-pointer bg-indigo-600 px-5 py-2.5 rounded-full font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600;
+}
+
+a.decorated {
+  @apply underline decoration-indigo-500 decoration-2;
 }
