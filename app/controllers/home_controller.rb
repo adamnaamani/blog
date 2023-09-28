@@ -1,3 +1,11 @@
 class HomeController < ApplicationController
-  def index; end
+  def index
+    posts
+  end
+
+  private
+
+  def posts
+    @posts ||= Post.limit(3)
+  end
 end

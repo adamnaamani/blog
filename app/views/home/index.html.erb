@@ -1,13 +1,21 @@
 <%= render "partials/container" do %>
-  <div class="mx-auto">
-    <img src="https://naamani.s3.ca-central-1.amazonaws.com/photos/0K9A2863Lo.jpg" alt="" class="h-20 w-20 mb-5 rounded-full">
-    <h1 class="uppercase tracking-wide"><%= t('name') %></h1>
-    <p class="mt-2">
+  <div class="space-y-2">
+    <%= image_tag "https://naamani.s3.ca-central-1.amazonaws.com/photos/0K9A2863Lo.jpg",
+                  class: "block h-20 w-20 my-4 rounded-full",
+                  alt: "Adam Naamani portrait" %>
+    <h1><%= t('name') %></h1>
+    <p>
       Owner at <%= link_to "Naamani Real Estate", t("nre"), class: "decorated" %>,
       agent with <%= link_to "eXp Realty", t("exp"), class: "decorated" %>,
       <%= link_to "programmer", t("github"), class: "decorated" %>,
       mixed martial artist.
     </p>
-    <%= render "partials/about" %>
+  </div>
+  <%= render "partials/about" %>
+  <div class="my-4">
+    <h2>Newest articles</h2>
+    <% @posts.each do |post| %>
+      <p><%= link_to post.title, post %></p>
+    <% end %>
   </div>
 <% end %>
