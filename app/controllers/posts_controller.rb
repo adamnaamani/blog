@@ -1,12 +1,6 @@
 class PostsController < ApplicationController
   def index
     posts
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(:posts, partial: 'posts/post', collection: posts)
-      end
-      format.html
-    end
   end
 
   def new
@@ -14,10 +8,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    post
-  end
-
-  def edit
     post
   end
 
@@ -31,6 +21,14 @@ class PostsController < ApplicationController
       end
       format.html
     end
+  end
+
+  def edit
+    post
+  end
+
+  def update
+    post.update(permitted_params)
   end
 
   def destroy
