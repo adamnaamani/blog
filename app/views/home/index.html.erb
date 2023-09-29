@@ -1,21 +1,30 @@
+<div class="mx-auto max-w-3xl mt-5 px-4 lg:px-0 space-y-10">
+  <p class="text-md text-center leading-8 text-gray-600 dark:text-white">
+    Hey! I'm Adam—owner at <%= link_to "Naamani Real Estate", t("nre"), class: "decorated" %>, agent with <%= link_to "eXp Realty", t("exp"), class: "decorated" %>, <%= link_to "programmer", t("github"), class: "decorated" %>, mixed martial artist. Subscribe below to follow my thinking on real estate, business, product development, and random musings. Thanks for your time today.
+  </p>
+  <%= render "partials/subscribe" %>
+</div>
 <%= render "partials/container" do %>
-  <div class="space-y-2">
-    <%= image_tag "https://naamani.s3.ca-central-1.amazonaws.com/photos/0K9A2863Lo.jpg",
-                  class: "block h-20 w-20 my-4 rounded-full",
-                  alt: "Adam Naamani portrait" %>
-    <h1><%= t('name') %></h1>
-    <p>
-      Owner at <%= link_to "Naamani Real Estate", t("nre"), class: "decorated" %>,
-      agent with <%= link_to "eXp Realty", t("exp"), class: "decorated" %>,
-      <%= link_to "programmer", t("github"), class: "decorated" %>,
-      mixed martial artist.
-    </p>
-  </div>
-  <%= render "partials/about" %>
-  <div class="my-4">
-    <h2>Newest articles</h2>
-    <% @posts.each do |post| %>
-      <p><%= link_to post.title, post %></p>
-    <% end %>
+  <div class="space-y-10">
+    <div class="space-y-2">
+      <h2 class="text-2xl sm:text-2xl tracking-tight text-gray-900 dark:text-white">What am I doing now?</h2>
+      <p class="text-md leading-8 text-gray-600 dark:text-white">See my "now" page.</p>
+    </div>
+    <div class="space-y-2">
+      <h2 class="text-2xl sm:text-2xl tracking-tight text-gray-900 dark:text-white flex justify-between">
+        Newest articles <%= link_to "See all", posts_path, class: "text-sm font-medium underline" %>
+      </h2>
+      <% @posts.each do |post| %>
+        <p class="text-md leading-8 text-gray-600 dark:text-white"><%= link_to post.title, post %></p>
+      <% end %>
+    </div>
+    <div class="space-y-2">
+      <h2 class="text-2xl sm:text-2xl tracking-tight text-gray-900 dark:text-white">Projects</h2>
+      <p class="text-md leading-8 text-gray-600 dark:text-white"><%= link_to "Naamani Real Estate", "https://naamanirealestate.com" %></p>
+    </div>
+    <div class="space-y-2">
+      <h2 class="text-2xl sm:text-2xl tracking-tight text-gray-900 dark:text-white">Books</h2>
+      <p class="text-md leading-8 text-gray-600 dark:text-white"><%= link_to "The Ultimate Sales Machine", "https://www.ultimatesalesmachine.com/book-1a" %></p>
+    </div>
   </div>
 <% end %>

@@ -1,3 +1,13 @@
-<% if @posts.any? %>
-  <%= render partial: "posts/post", collection: @posts %>
+<%= render "partials/container" do %>
+  <% if @posts.any? %>
+    <ul role="list" class="space-y-3">
+      <% @posts.each do |post| %>
+        <%= link_to post do %>
+          <li class="overflow-hidden rounded-md bg-white dark:text-gray-900 px-6 py-4 shadow">
+            <%= post.title %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
 <% end %>
