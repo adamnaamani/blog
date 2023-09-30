@@ -68,6 +68,8 @@ label {
 .decorated {
   @apply underline decoration-indigo-500 decoration-2;
 }
+
+/* Third-party */
 .trix-content {
   @apply space-y-5;
 }
@@ -82,9 +84,36 @@ label {
 	image-rendering: high-quality;
 	font-size: 0;
 }
+.post-image figcaption {
+  @apply text-sm text-center text-gray-500;
+}
 .wp-block-code {
-  @apply text-white !bg-slate-900 !my-5 !p-5;
+  @apply text-white !bg-slate-900 !p-5;
 }
 .wp-element-caption {
   @apply text-sm text-center text-gray-500;
+}
+.wp-block-gallery {
+  @apply grid grid-cols-2 !pb-5;
+}
+.wp-block-gallery img {
+  @apply !h-full;
+}
+.wp-block-jetpack-image-compare {
+  @apply !pb-5;
+}
+.wp-block-jetpack-image-compare figcaption {
+  @apply hidden;
+}
+.juxtapose {
+  @apply grid grid-cols-2;
+}
+.juxtapose img {
+  @apply !h-full;
+}
+.tiled-gallery__row {
+  @apply !grid !grid-cols-3 !content-center items-center gap-2;
+}
+.tiled-gallery__row img {
+  @apply h-full;
 }
