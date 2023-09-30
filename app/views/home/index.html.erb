@@ -1,6 +1,13 @@
 <div class="mx-auto max-w-3xl mt-5 px-4 lg:px-0 space-y-10">
   <p class="text-md text-center leading-8 text-gray-600 dark:text-white">
-    Hey! I'm Adam—owner at <%= link_to "Naamani Real Estate", t("nre"), class: "decorated" %>, agent with <%= link_to "eXp Realty", t("exp"), class: "decorated" %>, and an entrepreneur specialized in <%= link_to "proptech", t("github"), class: "decorated" %>. Subscribe below to follow my thinking on real estate, business, product development, and random musings. Thanks for your time today.
+    Hey! I'm Adam—owner at <%= link_to "Naamani Real Estate", t("nre"), class: "decorated" %>, agent with <%= link_to "eXp Realty", t("exp"), class: "decorated" %>, and an entrepreneur specialized in <%= link_to "proptech", t("github"), class: "decorated" %>. Subscribe below to follow my thinking on real estate, business, product development, and random musings.
+  </p>
+  <p class="text-md text-center leading-8 text-gray-600 dark:text-white">
+    I write regularly in my <%= link_to "newsletter", t('newsletter'), class: "decorated" %>.
+    I welcome emails to <%= link_to t("email"), "mailto:#{t("email")}", class: "decorated" %>.
+    You can also find me on <%= link_to "X", t("x"), class: "decorated" %>,
+    <%= link_to "LinkedIn", t("linkedin"), class: "decorated" %>, and
+    <%= link_to "Instagram", t("instagram"), class: "decorated" %>.
   </p>
   <%= render "partials/subscribe" %>
 </div>
