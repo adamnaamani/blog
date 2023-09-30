@@ -1,6 +1,10 @@
 en:
   name: "Adam Naamani"
   email: "adam@naamanirealestate.com"
+  telephone: "604-889-7943"
+  author: "Adam Naamani"
+  website: "https://adamnaamani.com"
+  portrait: "https://naamani.s3.ca-central-1.amazonaws.com/photos/0K9A2863Lo.jpg"
   x: "https://x.com/adamknaamani"
   linkedin: "https://linkedin.com/in/adamnaamani"
   instagram: "https://instagram.com/naamanirealestate"
@@ -8,3 +12,28 @@ en:
   nre: "https://naamanirealestate.com"
   exp: "https://adamnaamani.exprealty.careers"
   github: "https://github.com/adamnaamani"
+  logo: "https://naamani.s3.ca-central-1.amazonaws.com/photos/0K9A2863Lo.jpg"
+  errors:
+    not_found:
+      title: "The page you were looking for doesn't exist (404)"
+    internal_server:
+      title: "We're sorry, but something went wrong (500)"
+    unprocessable:
+      title: "The change you wanted was rejected (422)"
+  seo:
+    author: "Adam Naamani"
+    title: "Adam Naamani"
+    description: "Owner at Naamani Real Estate, agent with eXp Realty, and entrepreneur specialized in proptech. Subscribe to follow my thinking on real estate, business, and product development."
+    keywords: "blog, real estate, tech, business, programming, writing"
+    context: "https://schema.org"
+    type: "LocalBusiness"
+    id: "https://adamnaamani.com"
+    name: "Adam Naamani"
+    telephone: "604-889-7943"
+    address:
+      type: "PostalAddress"
+      street_address: "#1500 - 701 West Georgia Street"
+      address_locality: "Vancouver"
+      address_region: "British Columbia"
+      address_country: "Canada"
+      postal_code: "V7Y 1C6"

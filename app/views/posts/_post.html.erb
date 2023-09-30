@@ -5,9 +5,10 @@
     </div>
     <div class="group relative">
       <h1 class="text-2xl font-bold mt-3"><%= post.title %></h1>
-      <p class="mt-5">
-        <%= post.content %>
-      </p>
+      <p class="mt-5"><%= post.content %></p>
     </div>
   </article>
+</div>
+<div class="rounded-md bg-white border dark:border-slate-700 dark:bg-slate-900 dark:text-gray-200 mt-20 pt-5 pb-8 shadow-sm">
+  <%= render "partials/subscribe" %>
 </div>

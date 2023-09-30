@@ -1,0 +1,10 @@
+<% if local_assigns[:post].present? %>
+  <%= link_to post.slug do %>
+    <div class="rounded-md bg-white border dark:border-slate-700 dark:bg-slate-900 dark:text-gray-200 my-5 px-6 py-6 shadow-sm">
+      <p class="text-gray-500 text-xs"><%= post.created_at.to_date.to_fs(:long) %></p>
+      <h4 class="mt-1"><%= post.title %></h4>
+      <p class="text-sm dark:text-white mt-2"><%= post.content.to_plain_text.truncate(300) %></p>
+      <div class="text-center mt-4"><%= button_to "Read More", post, class: "border p-2 px-3 rounded-full text-sm" %></div>
+    </div>
+  <% end %>
+<% end %>

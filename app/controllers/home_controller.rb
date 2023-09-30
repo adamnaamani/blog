@@ -6,6 +6,7 @@ class HomeController < ApplicationController
   private
 
   def posts
-    @posts ||= Post.limit(3)
+    @posts ||= Post.order(published_date: :desc)
+                   .limit(10)
   end
 end

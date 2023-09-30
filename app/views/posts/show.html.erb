@@ -1,7 +1,9 @@
 <%= render "partials/container" do %>
   <%= render partial: "posts/post", locals: { post: @post } %>
-  <div class="space-x-1 my-10">
-    <%= link_to "Edit", edit_post_path(@post), class: "btn" %>
-    <%= link_to "Delete", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn" %>
-  </div>
+  <% if user_signed_in? %>
+    <div class="space-x-1 my-10">
+      <%= link_to "Edit", edit_post_path(@post), class: "btn" %>
+      <%= link_to "Delete", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn" %>
+    </div>
+  <% end %>
 <% end %>

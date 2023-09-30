@@ -1,6 +1,12 @@
 class PostsController < ApplicationController
   def index
+    title 'Blog'
     posts
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html
+    end
   end
 
   def new
@@ -8,6 +14,11 @@ class PostsController < ApplicationController
   end
 
   def show
+    redirect_to posts_url and return unless post.present?
+
+    title post.title
+    description post.description
+
     post
   end
 
@@ -44,11 +55,11 @@ class PostsController < ApplicationController
   private
 
   def posts
-    @posts ||= Post.all.order(created_at: :desc)
+    @posts ||= Post.order(published_date: :desc)
   end
 
   def post
-    @post ||= Post.find(params[:id])
+    @post ||= Post.find_by_slug(params[:slug])
   end
 
   def permitted_params

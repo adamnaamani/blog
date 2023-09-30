@@ -1,0 +1,27 @@
+<%= render "users/shared/form" do %>
+  <h1>Sign in</h1>
+  <%= form_for resource, as: resource_name, url: session_path(resource_name) do |form| %>
+    <div class="space-y-4">
+      <div class="space-y-2">
+        <%= form.label :email %>
+        <%= form.email_field :email, required: true %>
+      </div>
+      <div class="space-y-2">
+        <%= form.label :password %>
+        <%= form.password_field :password, required: true %>
+      </div>
+      <% if devise_mapping.rememberable? %>
+        <div class="flex items-center">
+          <%= form.check_box :remember_me %>
+          <%= form.label :remember_me, class: "ms-2" %>
+        </div>
+      <% end %>
+      <div class="space-y-2">
+        <%= form.submit "Sign in", class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+  <div class="text-sm">
+    <%= render "users/shared/links" %>
+  </div>
+<% end %>

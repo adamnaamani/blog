@@ -1,0 +1,17 @@
+<link rel="canonical" href="<%= request.original_url %>" />
+<title><%= @title.presence || t('seo.title') %></title>
+<meta name="description" content="<%= @description.presence || t('seo.description') %>">
+<meta name="keywords" content="<%= t('seo.keywords') %>" />
+<meta name="robots" content="index, follow" />
+<meta property="og:locale" content="en_CA" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="<%= @title.presence || t('seo.title') %>" />
+<meta property="og:description" content="<%= @description.presence || t('seo.description') %>" />
+<meta property="og:url" content="<%= request.original_url %>" />
+<meta property="og:site_name" content="<%= t('seo.title') %>" />
+<meta property="og:image" content="<%= t('logo') %>" />
+<meta property="og:image:width" content="300" />
+<meta property="og:image:height" content="300" />
+<meta property="og:image:type" content="image/webp" />
+<meta name="author" content="<%= t('seo.author') %>" />
+<%= json_ld %>
