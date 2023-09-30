@@ -3,8 +3,7 @@ namespace :db do
 
   desc 'Run database command'
   task run: :environment do
-    file_location = Rails.root.join('posts.json')
-    file = File.read(file_location)
+    file = URI.open('https://naamani.s3.ca-central-1.amazonaws.com/json/posts.json').read
     object = JSON.parse(file)
     posts = object['rss']['channel']['item']
 
@@ -18,8 +17,32 @@ namespace :db do
         content: post['encoded'][0]['__cdata']
       }
       Post.transaction do
-        Post.create(attributes)
+        post = Post.find_or_initialize_by(post_id: attributes[:post_id])
+        post.assign_attributes(attributes)
+        post.save
       end
+    end
+  end
+
+  desc 'Run images command'
+  task images: :environment do
+    file = URI.open('https://naamani.s3.ca-central-1.amazonaws.com/json/media.json').read
+    object = JSON.parse(file)
+    images = object['rss']['channel']['item']
+
+    images = images.map do |image|
+      {
+        guid: image['guid'],
+        published_date: image['pubDate'],
+        post_id: image['post_id'],
+        post_parent: image['post_parent'],
+        post_name: image['post_name']['__cdata'],
+        filename: image['guid'].to_s.split('/')[-1]
+      }
+    end
+
+    Post.find_each do |post|
+      image = images.select { |i| i[:post_parent] == post.post_id }
     end
   end
 end

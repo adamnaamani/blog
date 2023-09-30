@@ -3,7 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.2.2"
 
+gem "aws-sdk-s3", require: false
 gem "devise"
+gem "image_processing"
 gem "importmap-rails"
 gem "nokogiri"
 gem "pg", "~> 1.1"
