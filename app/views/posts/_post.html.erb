@@ -1,11 +1,11 @@
 <div id="<%= dom_id(post) %>">
-  <article class="flex flex-col items-start justify-between">
-    <div class="flex items-center text-sm">
-      <time class="text-gray-500"><%= post.published_date.to_date.to_fs(:long) %></time>
+  <article class="flex flex-col justify-between">
+    <div class="flex items-center justify-center text-center">
+      <time class="text-gray-500 text-sm"><%= post.published_date.to_date.to_fs(:long) %></time>
     </div>
     <div class="group relative max-w-3xl">
-      <h1 class="text-2xl font-bold mt-2"><%= post.title %></h1>
-      <p class="mt-5"><%= post.content %></p>
+      <h1 class="text-2xl text-center font-bold mt-2"><%= post.title %></h1>
+      <p class="mt-10"><%= post.content %></p>
     </div>
   </article>
 </div>
