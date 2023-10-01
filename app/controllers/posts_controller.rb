@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
   def index
     title 'Blog'
-    posts
 
+    posts
     respond_to do |format|
       format.turbo_stream
       format.html
@@ -10,7 +10,7 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    @post = current_user.posts.new
   end
 
   def show
@@ -19,8 +19,6 @@ class PostsController < ApplicationController
     title post.title
     description post.description
 
-    post
-
     respond_to do |format|
       format.turbo_stream
       format.html
@@ -28,7 +26,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(permitted_params)
+    @post = current_user.posts.new(permitted_params)
     @post.save
 
     respond_to do |format|
@@ -44,14 +42,14 @@ class PostsController < ApplicationController
   end
 
   def update
-    post = Post.find(params[:slug])
+    post = current_user.posts.find(params[:slug])
     post.update(permitted_params)
 
     redirect_to post_path(slug: post.slug)
   end
 
   def destroy
-    post.destroy
+    current_user.posts.find_by_slug(params[:slug]).destroy
 
     respond_to do |format|
       format.turbo_stream do
