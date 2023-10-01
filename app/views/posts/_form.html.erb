@@ -1,4 +1,4 @@
-<%= form_with model: @post do |form| %>
+<%= form_with model: @post, data: { turbo: false } do |form| %>
   <%= form.text_field :title, placeholder: "Post title", class: "w-full border-0 focus:outline-none" %>
   <%= form.rich_text_area :content %>
   <%= form.submit class: "btn" %>

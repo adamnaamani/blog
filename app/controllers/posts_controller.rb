@@ -20,6 +20,11 @@ class PostsController < ApplicationController
     description post.description
 
     post
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html
+    end
   end
 
   def create
@@ -28,7 +33,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream do
-        redirect_to post_path(@post)
+        redirect_to post_path(@post.slug)
       end
       format.html
     end
@@ -39,7 +44,10 @@ class PostsController < ApplicationController
   end
 
   def update
+    post = Post.find(params[:slug])
     post.update(permitted_params)
+
+    redirect_to post_path(slug: post.slug)
   end
 
   def destroy
@@ -47,7 +55,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream do
-        redirect_to root_url
+        redirect_to posts_url
       end
     end
   end
