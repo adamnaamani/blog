@@ -6,7 +6,7 @@ body, html {
   @apply m-0 p-0;
 }
 body {
-  @apply dark:text-white bg-white dark:bg-slate-800;
+  @apply text-base dark:text-white bg-white dark:bg-slate-800;
 }
 img {
 	@apply object-cover object-center w-full;
@@ -34,9 +34,6 @@ h4 {
 }
 h5 {
   @apply text-base;
-}
-p {
-  @apply text-gray-800;
 }
 ul {
   @apply list-disc;
