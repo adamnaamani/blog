@@ -49,7 +49,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    current_user.posts.find_by_slug(params[:slug]).destroy
+    current_user.posts.find(params[:slug]).destroy
 
     respond_to do |format|
       format.turbo_stream do
