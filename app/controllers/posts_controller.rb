@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   def index
     title 'Blog'
 
-    posts
+    @pagy, @posts = pagy(posts)
     respond_to do |format|
       format.turbo_stream
       format.html

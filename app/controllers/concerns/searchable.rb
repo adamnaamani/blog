@@ -2,7 +2,7 @@ module Searchable
   extend ActiveSupport::Concern
 
   included do
-    helper_method :json_ld, :seo_tags
+    helper_method :json_ld, :seo_tags, :canonical_tag
 
     def seo(**args)
       @post = args[:post]
@@ -77,6 +77,14 @@ module Searchable
 
     def seo_tags
       render partial: 'partials/seo'
+    end
+
+    def canonical_tag
+      if controller_name == 'posts' && action_name == 'show'
+        [request.base_url, @post.slug].join('/') if @post.present?
+      else
+        url_for(only_path: false, protocol: 'https')
+      end
     end
   end
 end

@@ -1,4 +1,4 @@
-<link rel="canonical" href="<%= request.original_url %>" />
+<link rel="canonical" href="<%= canonical_tag %>" />
 <title><%= @title.presence || t('seo.title') %></title>
 <meta name="description" content="<%= @description.presence || t('seo.description') %>">
 <meta name="keywords" content="<%= t('seo.keywords') %>" />
@@ -7,7 +7,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:title" content="<%= @title.presence || t('seo.title') %>" />
 <meta property="og:description" content="<%= @description.presence || t('seo.description') %>" />
-<meta property="og:url" content="<%= request.original_url %>" />
+<meta property="og:url" content="<%= canonical_tag %>" />
 <meta property="og:site_name" content="<%= t('seo.title') %>" />
 <meta property="og:image" content="<%= t('logo') %>" />
 <meta property="og:image:width" content="300" />
