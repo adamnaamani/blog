@@ -1,6 +1,11 @@
 <%= form_with model: @post, data: { turbo: false } do |form| %>
-  <%= form.text_field :title, placeholder: "Post title", class: "w-full border-0 focus:outline-none" %>
-  <%= form.rich_text_area :content %>
-  <%= form.submit class: "btn" %>
-  <%= form.submit "Schedule Post", class: "ml-5" %>
+  <div class="p-6">
+    <%= form.text_field :title, placeholder: "Post title", class: "w-full !p-4 border-0 focus:outline-none" %>
+    <%= form.rich_text_area :content %>
+  </div>
+  <div class="fixed bottom-0 bg-white/80 backdrop-blur-sm max-w-4xl w-full m-auto p-6">
+    <%= form.submit class: "btn" %>
+    <%= form.submit "Save Draft", class: "btn" %>
+    <%= form.submit "Schedule Post", class: "ml-2" %>
+  </div>
 <% end %>
