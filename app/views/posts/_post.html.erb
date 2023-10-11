@@ -1,7 +1,9 @@
 <div id="<%= dom_id(post) %>">
   <article class="flex flex-col justify-between">
     <div class="flex items-center justify-center text-center">
-      <time class="text-gray-500 text-sm"><%= post.published_date.to_date.to_fs(:long) %></time>
+      <time class="text-gray-500 text-sm">
+        <%= post.published_date.to_date.to_fs(:long) if post.published_date.present? %>
+      </time>
     </div>
     <div class="group relative max-w-3xl">
       <h1 class="text-2xl text-center font-bold mt-2"><%= post.title %></h1>
