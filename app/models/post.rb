@@ -10,6 +10,10 @@ class Post < ApplicationRecord
   validates :slug, uniqueness: true
 
   def description
-    meta&.select { |item| item['_yoast_wpseo_metadesc'] }.first&.values&.first
+    meta_description = meta.select { |item| item['_yoast_wpseo_metadesc'] }
+
+    return unless meta_description.present?
+
+    meta_description.first.values.first
   end
 end
