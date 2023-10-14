@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[index show]
+
   def index
     title 'Blog'
 
@@ -7,10 +9,6 @@ class PostsController < ApplicationController
       format.turbo_stream
       format.html
     end
-  end
-
-  def new
-    @post = current_user.posts.new
   end
 
   def show
@@ -23,6 +21,10 @@ class PostsController < ApplicationController
       format.turbo_stream
       format.html
     end
+  end
+
+  def new
+    @post = current_user.posts.new
   end
 
   def create
@@ -61,7 +63,7 @@ class PostsController < ApplicationController
   private
 
   def posts
-    @posts ||= Post.order(published_date: :desc)
+    @posts ||= Post.published.order(published_date: :desc)
   end
 
   def post
