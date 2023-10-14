@@ -8,6 +8,8 @@ module Trackable
   private
 
   def track_action
+    return if user_signed_in? && current_user.admin?
+
     ahoy.track "Ran action", request.path_parameters
   end
 end
