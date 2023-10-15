@@ -6,7 +6,7 @@ body, html {
   @apply m-0 p-0;
 }
 body {
-  @apply text-base dark:text-white bg-white dark:bg-slate-800;
+  @apply text-base text-[#3A4F66] dark:text-white bg-white dark:bg-slate-800 antialiased;
 }
 img {
 	@apply object-cover object-center w-full;

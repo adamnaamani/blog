@@ -6,7 +6,6 @@ class PostsController < ApplicationController
 
     @pagy, @posts = pagy(posts)
     respond_to do |format|
-      format.turbo_stream
       format.html
     end
   end
@@ -18,7 +17,6 @@ class PostsController < ApplicationController
     description post.description
 
     respond_to do |format|
-      format.turbo_stream
       format.html
     end
   end
