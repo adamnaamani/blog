@@ -1,31 +1,32 @@
 <%= render "partials/header" %>
 <%= render "partials/container" do %>
-  <div class="pb-10 space-y-10">
-    <p class="text-md leading-8 text-gray-600 dark:text-white">
-      Hey! I'm Adam—owner at <%= link_to "Naamani Real Estate", t("nre"), class: "decorated" %>, agent with <%= link_to "eXp Realty", t("exp"), class: "decorated" %>, and an entrepreneur specialized in <%= link_to "proptech", t("github"), class: "decorated" %>. You can find me on <%= link_to "X", t("x"), class: "decorated" %>, <%= link_to "LinkedIn", t("linkedin"), class: "decorated" %>, and <%= link_to "Instagram", t("instagram"), class: "decorated" %>. I welcome emails to <%= link_to t("email"), "mailto:#{t("email")}", class: "decorated" %>. I write regularly in my <%= link_to "newsletter", t('newsletter'), class: "decorated" %>—subscribe below to follow my thinking on real estate, business, product development, and random musings.
+  <div class="pb-5 space-y-10">
+    <p class="text-md leading-8">
+      Hey! I'm Adam—owner of <%= link_to "Naamani Real Estate", t("nre"), class: "decorated" %>, agent with <%= link_to "eXp Realty", t("exp"), class: "decorated" %>, and entrepreneur specialized in <%= link_to "proptech", t("github"), class: "decorated" %>. You can find me on <%= link_to "X", t("x"), class: "decorated" %>, <%= link_to "LinkedIn", t("linkedin"), class: "decorated" %>, and <%= link_to "Instagram", t("instagram"), class: "decorated" %>. I welcome emails to <%= link_to t("email"), "mailto:#{t("email")}", class: "decorated" %>. I write regularly in my <%= link_to "newsletter", t('newsletter'), class: "decorated" %>—subscribe below to follow my thinking on real estate, business, product development, and random musings.
     </p>
     <%= render "partials/subscribe" %>
   </div>
   <div class="space-y-10">
     <div class="hidden space-y-2">
-      <h2 class="text-2xl sm:text-2xl tracking-tight text-gray-900 dark:text-white">What am I doing now?</h2>
-      <p class="text-md leading-8 text-gray-600 dark:text-white">See my "now" page.</p>
+      <h2 class="text-2xl sm:text-2xl tracking-tight">What am I doing now?</h2>
+      <p class="text-md leading-8">See my "now" page.</p>
     </div>
     <div class="space-y-2">
-      <h2 class="text-2xl sm:text-2xl tracking-tight text-gray-900 dark:text-white flex justify-between">
+      <h2 class="text-2xl sm:text-2xl tracking-tight flex justify-between">
         Newest articles <%= link_to "See all", blog_path, class: "text-sm font-medium underline" %>
       </h2>
       <% @posts.each do |post| %>
-        <p class="text-md leading-8 text-gray-600 dark:text-white"><%= link_to post.title, post.slug %></p>
+        <p class="text-md leading-8"><%= link_to post.title, post.slug %></p>
       <% end %>
     </div>
     <div class="hidden space-y-2">
-      <h2 class="text-2xl sm:text-2xl tracking-tight text-gray-900 dark:text-white">Projects</h2>
-      <p class="text-md leading-8 text-gray-600 dark:text-white"><%= link_to "Naamani Real Estate", "https://naamanirealestate.com" %></p>
+      <h2 class="text-2xl sm:text-2xl tracking-tight">Projects</h2>
+      <p class="text-md leading-8"><%= link_to "Naamani Real Estate", "https://naamanirealestate.com" %></p>
     </div>
     <div class="hidden space-y-2">
-      <h2 class="text-2xl sm:text-2xl tracking-tight text-gray-900 dark:text-white">Books</h2>
-      <p class="text-md leading-8 text-gray-600 dark:text-white"><%= link_to "The Ultimate Sales Machine", "https://www.ultimatesalesmachine.com/book-1a" %></p>
+      <h2 class="text-2xl sm:text-2xl tracking-tight">Books</h2>
+      <p class="text-md leading-8"><%= link_to "The Ultimate Sales Machine", "https://www.ultimatesalesmachine.com/book-1a" %></p>
     </div>
   </div>
+  <%= render "partials/footer" %>
 <% end %>
