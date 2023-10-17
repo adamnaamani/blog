@@ -2,7 +2,7 @@
 <%= render "partials/container" do %>
   <div class="pb-5 space-y-10">
     <p class="text-md leading-8">
-      Hey! I'm Adam—owner of <%= link_to "Naamani Real Estate", t("nre"), class: "decorated" %>, agent with <%= link_to "eXp Realty", t("exp"), class: "decorated" %>, and entrepreneur specialized in <%= link_to "proptech", t("github"), class: "decorated" %>. You can find me on <%= link_to "X", t("x"), class: "decorated" %>, <%= link_to "LinkedIn", t("linkedin"), class: "decorated" %>, and <%= link_to "Instagram", t("instagram"), class: "decorated" %>. I welcome emails to <%= link_to t("email"), "mailto:#{t("email")}", class: "decorated" %>. I write regularly in my <%= link_to "newsletter", t('newsletter'), class: "decorated" %>—subscribe below to follow my thinking on real estate, business, product development, and random musings.
+      Owner of <%= link_to "Naamani Real Estate", t("nre"), class: "decorated" %>, agent with <%= link_to "eXp Realty", t("exp"), class: "decorated" %>, and entrepreneur specialized in <%= link_to "proptech", t("github"), class: "decorated" %>. You can connect with me on <%= link_to "X", t("x"), class: "decorated" %>, <%= link_to "Instagram", t("instagram"), class: "decorated" %>, <%= link_to "LinkedIn", t("linkedin"), class: "decorated" %>, and <%= link_to "Email", "mailto:#{t("email")}", data: { turbo: false }, class: "decorated" %>. I write regularly in my <%= link_to "newsletter", t('newsletter'), class: "decorated" %>, subscribe below to follow my thinking on real estate, urbanism, tech, and business.
     </p>
     <%= render "partials/subscribe" %>
   </div>

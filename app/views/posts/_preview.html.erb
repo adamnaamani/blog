@@ -1,6 +1,6 @@
 <% if local_assigns[:post].present? %>
   <%= link_to post.slug do %>
-    <div class="rounded-md bg-white border dark:border-slate-700 dark:bg-transparent my-5 px-6 py-6 shadow-lg">
+    <div class="rounded-md bg-white border dark:border-slate-700 dark:bg-transparent my-5 px-6 py-6 shadow-sm dark:shadow-lg">
       <p class="text-gray-500 text-xs">
         <%= post.published_date.to_date.to_fs(:long) if post.published_date.present? %>
       </p>
