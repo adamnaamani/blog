@@ -1,4 +1,4 @@
-namespace :db do
+namespace :command do
   require 'csv'
 
   desc 'Run database command'
@@ -43,6 +43,14 @@ namespace :db do
 
     Post.find_each do |post|
       image = images.select { |i| i[:post_parent] == post.post_id }
+      if image.present?
+        image.each do |i|
+          post.images.attach(
+            io: URI.open(i[:guid]),
+            filename: i[:filename]
+          )
+        end
+      end
     end
   end
 end

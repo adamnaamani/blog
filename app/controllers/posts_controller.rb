@@ -61,11 +61,14 @@ class PostsController < ApplicationController
   private
 
   def posts
-    @posts ||= Post.published.order(published_date: :desc)
+    @posts ||= Post.published
+                   .with_attached_images
+                   .order(published_date: :desc)
   end
 
   def post
-    @post ||= Post.find_by_slug(params[:slug])
+    @post ||= Post.with_attached_images
+                  .find_by_slug(params[:slug])
   end
 
   def permitted_params
