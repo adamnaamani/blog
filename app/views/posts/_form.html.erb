@@ -1,15 +1,23 @@
 <%= form_with model: @post,
-              data: { controller: "form" },
+              data: { controller: "form", action: "input->form#save", form_scope_value: "post", form_url_value: save_post_path(@post) },
               class: "hidden max-w-3xl m-auto" do |form| %>
   <div class="bg-white dark:bg-gray-700 shadow-xl">
     <div class="p-6 min-h-screen">
-      <%= form.text_field :title, placeholder: "Post title", class: "!text-2xl text-center font-bold static" %>
-      <%= form.rich_text_area :content %>
+      <%= form.text_field :title,
+                          required: true,
+                          placeholder: "Post title",
+                          data: { form_target: "title" },
+                          class: "!text-2xl text-center font-bold static" %>
+      <%= form.rich_text_area :content, data: { form_target: "content" } %>
     </div>
     <div class="w-full p-6 border-t space-x-1">
       <%= form.submit class: "btn" %>
-      <%= form.submit "Save Draft", class: "btn" %>
-      <%= form.submit "Schedule Post", class: "btn" %>
+      <%= form.button @post.published? ? "Draft" : "Publish",
+                      type: :submit,
+                      name: :status,
+                      value: @post.published? ? :draft : :published,
+                      data: { turbo_confirm: "Are you sure you want to publish this post?" },
+                      class: "btn" %>
     </div>
   </div>
 <% end %>

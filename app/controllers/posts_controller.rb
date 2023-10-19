@@ -2,6 +2,8 @@ class PostsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
+    redirect_to root_url and return unless posts.any?
+
     title 'Blog'
 
     @pagy, @posts = pagy(posts)
@@ -23,6 +25,9 @@ class PostsController < ApplicationController
 
   def new
     @post = current_user.posts.new
+    post.save(validate: false)
+
+    redirect_to edit_post_path(post)
   end
 
   def create
@@ -31,25 +36,34 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream do
-        redirect_to post_path(@post.slug)
+        redirect_to post_path(@post)
       end
       format.html
     end
   end
 
   def edit
-    post
+    @post = current_user.posts.find(params[:id])
   end
 
   def update
-    post = current_user.posts.find(params[:slug])
-    post.update(permitted_params)
+    post = current_user.posts.find(params[:id])
 
-    redirect_to post_path(slug: post.slug)
+    return unless post.present?
+
+    post.assign_attributes(permitted_params)
+    post.status = params[:status].to_sym if params[:status].present?
+    post.save
+
+    redirect_to "/#{post.slug}"
   end
 
   def destroy
-    current_user.posts.find(params[:slug]).destroy
+    post = current_user.posts.find(params[:id])
+
+    return unless post.present?
+
+    post.destroy
 
     respond_to do |format|
       format.turbo_stream do
@@ -58,17 +72,49 @@ class PostsController < ApplicationController
     end
   end
 
+  def save
+    post = current_user.posts.find(params[:id])
+
+    return unless post.present?
+
+    post.update(permitted_params)
+
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
+  def drafts
+    @posts = Post.draft
+                 .with_rich_text_content_and_embeds
+                 .with_attached_images
+                 .order(created_at: :desc)
+
+    redirect_to root_url and return unless posts.any?
+
+    title 'Drafts'
+
+    @pagy, @posts = pagy(posts)
+    respond_to do |format|
+      format.html do
+        render template: 'posts/index'
+      end
+    end
+  end
+
   private
 
   def posts
     @posts ||= Post.published
+                   .with_rich_text_content_and_embeds
                    .with_attached_images
                    .order(published_date: :desc)
   end
 
   def post
-    @post ||= Post.with_attached_images
-                  .find_by_slug(params[:slug])
+    @post ||= Post.with_rich_text_content_and_embeds
+                  .with_attached_images
+                  .find_by(slug: params[:slug])
   end
 
   def permitted_params

@@ -7,7 +7,10 @@ class Post < ApplicationRecord
 
   enum :status, [:draft, :published, :archived]
 
+  validates :title, presence: true
   validates :slug, uniqueness: true
+
+  before_update :create_slug, if: :title_changed?
 
   def description
     return unless meta.present?
@@ -17,5 +20,11 @@ class Post < ApplicationRecord
     return unless meta_description.present?
 
     meta_description.first.values.first
+  end
+
+  private
+
+  def create_slug
+    self.slug = Sluggable.call(title)
   end
 end

@@ -86,7 +86,7 @@ pre {
 /* Trix */
 .trix-content {
   @apply space-y-5;
-  & > div {
+  & > div, blockquote, ul {
     @apply leading-7;
   }
   & a {
@@ -99,40 +99,6 @@ pre {
   }
 }
 
-/* WordPress */
-.post-image figcaption {
-  @apply text-sm text-center text-gray-500;
-}
-.wp-block-code {
-  @apply text-white !bg-slate-900 !p-5;
-}
-.wp-element-caption {
-  @apply text-sm text-center text-gray-500;
-}
-.wp-block-gallery {
-  @apply grid grid-cols-2 !pb-5;
-  & img {
-    @apply !h-full;
-  }
-}
-.wp-block-jetpack-image-compare {
-  @apply !pb-5;
-  & figcaption {
-    @apply hidden;
-  }
-}
-.juxtapose {
-  @apply grid grid-cols-2;
-  & img {
-    @apply !h-full;
-  }
-}
-.tiled-gallery__row {
-  @apply !grid !grid-cols-3 !content-center items-center gap-2;
-  & img {
-    @apply h-full;
-  }
-}
 
 /* Pagination */
 .pagy-nav.pagination {
@@ -154,5 +120,5 @@ pre {
   @apply border-gray-300 inline-flex items-center border px-4 py-2 text-sm font-medium;
 }
 .page.active {
-  @apply z-10 border-indigo-500 bg-indigo-50 text-indigo-600 inline-flex items-center border px-4 py-2 text-sm font-medium;
+  @apply z-10 border-indigo-500 bg-indigo-50 dark:bg-gray-900 text-indigo-600 inline-flex items-center border px-4 py-2 text-sm font-medium;
 }

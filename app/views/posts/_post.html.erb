@@ -8,11 +8,15 @@
     <div class="group relative max-w-3xl">
       <h1 class="text-2xl text-center font-bold mt-2 mb-10"><%= post.title %></h1>
 
-      <% if post.images.attached? %>
-        <%= image_tag post.images.first, class: "mb-5 rounded-sm shadow" %>
-      <% end %>
+      <%= post.content %>
 
-      <p><%= post.content %></p>
+      <% if post.images.attached? %>
+        <div class="grid grid-cols-3 gap-1 my-5">
+          <% post.images.each do |image| %>
+            <%= image_tag image, alt: post_image_alt(image), class: "shadow h-48" %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </article>
 </div>
