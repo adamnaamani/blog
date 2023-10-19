@@ -102,6 +102,27 @@ class PostsController < ApplicationController
     end
   end
 
+  def purge_attachment
+    return unless current_user.admin?
+
+    attachment = ActiveStorage::Attachment.find(params[:id])
+
+    if attachment.purge_later
+      flash.now[:notice] = 'Attachment deleted'
+    else
+      flash.now[:alert] = 'Unprocessable'
+    end
+
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.update(:flash, partial: 'partials/flash'),
+          turbo_stream.remove(attachment)
+        ]
+      end
+    end
+  end
+
   private
 
   def posts

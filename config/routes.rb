@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   resources :home
   resources :now
   resources :posts do
-    post :save, on: :member
     get :drafts, on: :collection
+    post :save, on: :member
+    delete :purge_attachment, on: :collection
   end
   resources :posts, param: :slug
   resources :subscribers
