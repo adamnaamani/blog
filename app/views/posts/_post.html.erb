@@ -13,7 +13,7 @@
           <% post.images.each do |image| %>
             <div id="<%= dom_id(image) %>" class="relative">
               <%= link_to image, target: "_blank" do %>
-                <%= image_tag image, alt: post_image_alt(image), class: "shadow h-64 bg-gray-400" %>
+                <%= image_tag image, alt: post_image_alt(image), class: "shadow #{post.images.count > 1 ? 'h-64' : 'h-full'} bg-gray-400" %>
               <% end %>
               <% if user_signed_in? && current_user.admin? %>
                 <%= link_to purge_attachment_posts_path(id: image.id),
