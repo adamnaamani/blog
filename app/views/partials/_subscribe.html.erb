@@ -1,5 +1,5 @@
 <div class="my-10 rounded-md bg-white border dark:border-slate-700 dark:bg-transparent shadow-sm dark:shadow-lg">
-  <div class="pt-10 pb-12 max-w-lg m-auto">
+  <div class="pt-10 pb-12 px-6 max-w-lg m-auto">
     <span class="block text-center text-gray-500 text-sm">Subscribe to get future posts via email.</span>
     <%= form_with scope: :subscriber, url: subscribers_path do |form| %>
       <%= turbo_frame_tag :email do %>
