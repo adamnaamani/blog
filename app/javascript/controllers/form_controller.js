@@ -24,6 +24,10 @@ export default class extends Controller {
     this.countTarget.innerHTML = `${this.descriptionTarget.value.length} characters`
   }
 
+  submit() {
+    this.element.requestSubmit()
+  }
+
   save() {
     clearTimeout(this.timeout)
 

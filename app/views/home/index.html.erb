@@ -1,14 +1,10 @@
 <%= render "partials/header" %>
 <%= render "partials/container" do %>
-  <div class="pb-5 space-y-10">
+  <div class="space-y-10 mb-10">
     <%= render "partials/bio" %>
     <%= render "partials/subscribe" %>
   </div>
-  <div class="space-y-10">
-    <div class="hidden space-y-2">
-      <h2 class="text-2xl sm:text-2xl tracking-tight">What am I doing now?</h2>
-      <p class="text-md leading-8">See my "now" page.</p>
-    </div>
+  <div class="space-y-10 mb-10">
     <div class="space-y-2">
       <h2 class="text-2xl sm:text-2xl tracking-tight flex justify-between">
         Newest articles <%= link_to "See all", blog_path, class: "text-sm font-medium underline" %>
@@ -16,6 +12,10 @@
       <% @posts.published.each do |post| %>
         <p class="text-md leading-8"><%= link_to post.title, post.slug %></p>
       <% end %>
+    </div>
+    <div class="hidden space-y-2">
+      <h2 class="text-2xl sm:text-2xl tracking-tight">What am I doing now?</h2>
+      <p class="text-md leading-8">See my "now" page.</p>
     </div>
     <div class="hidden space-y-2">
       <h2 class="text-2xl sm:text-2xl tracking-tight">Projects</h2>
@@ -26,5 +26,8 @@
       <p class="text-md leading-8"><%= link_to "The Ultimate Sales Machine", "https://www.ultimatesalesmachine.com/book-1a" %></p>
     </div>
   </div>
+  <%= turbo_frame_tag :uploads, src: uploads_path(format: :turbo_stream) do %>
+    <%= render "uploads/uploads" %>
+  <% end %>
   <%= render "partials/footer" %>
 <% end %>

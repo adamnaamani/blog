@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   end
   resources :posts, param: :slug
   resources :subscribers
+  resources :uploads do
+    delete :purge_attachment, on: :collection
+  end
 
   get '/blog', to: 'posts#index'
   get '/drafts', to: 'posts#drafts'
