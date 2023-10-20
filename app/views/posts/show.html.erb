@@ -7,4 +7,6 @@
 <%= render "partials/container" do %>
   <%= render partial: "posts/post", locals: { post: @post } %>
 <% end %>
-<%= render "partials/footer" %>
+<% if @post&.published? %>
+  <%= render "partials/footer" %>
+<% end %>

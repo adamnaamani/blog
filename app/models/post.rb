@@ -1,9 +1,9 @@
 class Post < ApplicationRecord
   belongs_to :user
 
-  has_many_attached :images
-
   has_rich_text :content
+
+  has_many_attached :images
 
   enum :status, %i[draft published archived]
 

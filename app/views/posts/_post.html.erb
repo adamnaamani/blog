@@ -29,4 +29,6 @@
     </div>
   </article>
 </div>
-<%= render "partials/subscribe" %>
+<% if post&.published? %>
+  <%= render "partials/subscribe" %>
+<% end %>
