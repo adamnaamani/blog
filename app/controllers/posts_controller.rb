@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   include Postable
 
+  after_action :track_action, only: %i[index show]
+
   def index
     redirect_to root_url and return unless posts.any?
 

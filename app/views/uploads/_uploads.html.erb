@@ -1,5 +1,5 @@
-<% if @uploads&.any? %>
-  <% @uploads.each do |upload| %>
+<% if local_assigns[:uploads]&.any? %>
+  <% uploads.each do |upload| %>
     <div id="<%= dom_id(upload) %>" class="relative">
       <%= image_tag upload.image.url %>
       <% if user_signed_in? && current_user.admin? %>

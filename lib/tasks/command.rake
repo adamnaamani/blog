@@ -53,4 +53,9 @@ namespace :command do
       end
     end
   end
+
+  desc 'Purge unattached'
+  task purge_unattached: :environment do
+    ActiveStorage::Blob.unattached.find_each(&:purge)
+  end
 end

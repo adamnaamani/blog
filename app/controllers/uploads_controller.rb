@@ -4,7 +4,7 @@ class UploadsController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.update(:uploads, partial: "uploads/uploads", collection: uploads)
+          turbo_stream.update(:uploads, partial: "uploads/uploads", locals: { uploads: })
         ]
       end
     end
@@ -20,7 +20,7 @@ class UploadsController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.update(:uploads, partial: "uploads/uploads", collection: uploads)
+          turbo_stream.update(:uploads, partial: "uploads/uploads", locals: { uploads: })
         ]
       end
     end

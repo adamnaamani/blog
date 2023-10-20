@@ -20,6 +20,8 @@ module Blog
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Don't generate system test files.
+    config.autoload_lib(ignore: %w(assets tasks))
+
     config.generators.system_tests = nil
 
     config.active_storage.service = :amazon

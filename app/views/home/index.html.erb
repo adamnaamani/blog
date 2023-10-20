@@ -1,4 +1,12 @@
-<%= render "partials/header" %>
+<%= render "partials/header" do %>
+  <%= form_with scope: :upload,
+                url: uploads_path,
+                data: { controller: "form", action: "input->form#submit" },
+                class: "flex" do |form| %>
+    <%= form.label :image, class: "btn btn-primary capitalize w-full" %>
+    <%= form.file_field :image, class: "sr-only" %>
+  <% end %>
+<% end %>
 <%= render "partials/container" do %>
   <div class="space-y-10 mb-10">
     <%= render "partials/bio" %>
@@ -7,7 +15,7 @@
   <div class="space-y-10 mb-10">
     <div class="space-y-2">
       <h2 class="text-2xl sm:text-2xl tracking-tight flex justify-between">
-        Newest articles <%= link_to "See all", blog_path, class: "text-sm font-medium underline" %>
+        Newest articles <%= link_to "See all", blog_path, class: "text-base font-medium underline" %>
       </h2>
       <% @posts.published.each do |post| %>
         <p class="text-md leading-8"><%= link_to post.title, post.slug %></p>
