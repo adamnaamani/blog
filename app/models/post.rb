@@ -5,7 +5,7 @@ class Post < ApplicationRecord
 
   has_rich_text :content
 
-  enum :status, [:draft, :published, :archived]
+  enum :status, %i[draft published archived]
 
   validates :title, presence: true
   validates :slug, uniqueness: true
@@ -15,11 +15,14 @@ class Post < ApplicationRecord
   def description
     return unless meta.present?
 
-    meta_description = meta.select { |item| item['_yoast_wpseo_metadesc'] }
+    metadesc = meta.select { |item| item['_yoast_wpseo_metadesc'] }
+    description = meta.select { |item| item['description'] }
 
-    return unless meta_description.present?
-
-    meta_description.first.values.first
+    if metadesc.present?
+      metadesc.first.values.first
+    elsif description.present?
+      description.values.first
+    end
   end
 
   private

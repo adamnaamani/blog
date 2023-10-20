@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = [ "title", "content" ]
+  static targets = [ "title", "content", "description", "count" ]
   static values = {
     scope: String,
     url: String,
@@ -9,7 +9,19 @@ export default class extends Controller {
 
   connect() {
     this.token = document.querySelector("meta[name='csrf-token']").content
+    this.toolbar = document.querySelector('trix-toolbar')
     this.element.classList.remove("hidden")
+
+    if (this.toolbar) {
+      this.toolbar.classList.add('sticky', 'top-0')
+    }
+    if (this.hasCountTarget) {
+      this.count()
+    }
+  }
+
+  count() {
+    this.countTarget.innerHTML = `${this.descriptionTarget.value.length} characters`
   }
 
   save() {

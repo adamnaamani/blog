@@ -7,17 +7,30 @@
                           required: true,
                           placeholder: "Post title",
                           data: { form_target: "title" },
-                          class: "!text-2xl text-center font-bold static" %>
+                          class: "!text-2xl mb-4 text-center font-bold static" %>
       <%= form.rich_text_area :content, data: { form_target: "content" } %>
     </div>
     <div class="w-full p-6 border-t space-x-1">
-      <%= form.submit class: "btn" %>
-      <%= form.button @post.published? ? "Draft" : "Publish",
-                      type: :submit,
-                      name: :status,
-                      value: @post.published? ? :draft : :published,
-                      data: { turbo_confirm: "Are you sure you want to publish this post?" },
-                      class: "btn" %>
+      <div class="mb-6 space-y-2">
+        <%= form.label :meta_description %>
+        <%= fields_for :meta do |meta_fields| %>
+          <%= meta_fields.text_area :description,
+                                    maxlength: 160,
+                                    value: @post.description,
+                                    data: { form_target: "description", action: "input->form#count" },
+                                    class: "resize-none" %>
+        <% end %>
+        <p data-form-target="count" class="mt-2 text-sm text-gray-500"></p>
+      </div>
+      <div>
+        <%= form.submit class: "btn" %>
+        <%= form.button @post.published? ? "Draft" : "Publish",
+                        type: :submit,
+                        name: :status,
+                        value: @post.published? ? :draft : :published,
+                        data: { turbo_confirm: "Are you sure you want to publish this post?" },
+                        class: "btn" %>
+      </div>
     </div>
   </div>
 <% end %>

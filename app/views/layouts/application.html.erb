@@ -11,11 +11,11 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <%= turbo_frame_tag :flash do %>
-      <%= render "partials/flash" %>
-    <% end %>
     <main>
       <%= yield %>
     </main>
+    <%= turbo_frame_tag :flash do %>
+      <%= render "partials/flash" %>
+    <% end %>
   </body>
 </html>

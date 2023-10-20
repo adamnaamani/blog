@@ -24,16 +24,24 @@
 }
 .trix-button-group {
   border: 0 !important;
+  margin: 0 !important;
 }
 .trix-active {
   background-color: #ddd !important;
   border-radius: 10% !important;
 }
 trix-toolbar {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  background: white;
+  padding: 0.5em 0;
+  z-index: 1;
+}
+@media (prefers-color-scheme: dark) {
+  trix-toolbar {
+    background: rgb(55, 65, 81) !important;
+  }
 }
 trix-editor {
   border: 0;
+  margin-top: 20px;
   min-height: 500px;
 }
