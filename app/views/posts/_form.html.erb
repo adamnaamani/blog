@@ -28,7 +28,7 @@
                         type: :submit,
                         name: :status,
                         value: @post.published? ? :draft : :published,
-                        data: { turbo_confirm: "Are you sure you want to publish this post?" },
+                        data: { turbo_confirm: "Are you sure you want to #{@post.published? ? "draft" : "publish"} this post?" },
                         class: "btn" %>
       </div>
     </div>

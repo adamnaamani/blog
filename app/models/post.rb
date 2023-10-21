@@ -10,7 +10,8 @@ class Post < ApplicationRecord
   validates :title, presence: true
   validates :slug, uniqueness: true
 
-  before_update :create_slug, if: :title_changed?
+  before_update :set_slug, if: [:title_changed?, :draft?]
+  before_update :set_published_date, if: :status_changed?
 
   def description
     return unless meta.present?
@@ -27,7 +28,15 @@ class Post < ApplicationRecord
 
   private
 
-  def create_slug
+  def set_slug
     self.slug = Sluggable.call(title)
+  end
+
+  def set_published_date
+    if published?
+      self.published_date = DateTime.now
+    elsif draft? || archived?
+      self.published_date = nil
+    end
   end
 end
