@@ -1,4 +1,6 @@
 class UploadsController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[index]
+
   def index
     uploads
     respond_to do |format|
