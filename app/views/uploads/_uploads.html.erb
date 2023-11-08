@@ -6,7 +6,7 @@
     <div class="grid grid-cols-2 gap-1">
       <% uploads.each do |upload| %>
         <div id="<%= dom_id(upload) %>" class="relative">
-          <%= image_tag upload.image.url, class: "shadow bg-slate-200 rounded-sm h-64" %>
+          <%= image_tag upload.image.url, class: "shadow bg-slate-200 rounded-sm h-72" %>
           <% if user_signed_in? && current_user.admin? %>
             <%= link_to purge_attachment_uploads_path(id: upload.id),
                         data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this image?" },
