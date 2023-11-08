@@ -7,7 +7,7 @@
       <% uploads.each do |upload| %>
         <div id="<%= dom_id(upload) %>" class="relative">
           <%= link_to upload.image.url do %>
-            <%= image_tag upload.image.url, class: "shadow bg-slate-200 rounded-sm h-72" %>
+            <%= image_tag upload.image.url, class: "shadow bg-slate-200 h-40 sm:h-72" %>
           <% end %>
           <% if user_signed_in? && current_user.admin? %>
             <%= link_to purge_attachment_uploads_path(id: upload.id),

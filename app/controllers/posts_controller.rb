@@ -15,8 +15,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    redirect_to posts_url and return unless post.present?
-    redirect_to posts_url and return if post.draft? && !user_signed_in?
+    redirect_to root_url and return unless post.present?
+    redirect_to root_url and return if post.draft? && !user_signed_in?
 
     title post.title
     description post.description
