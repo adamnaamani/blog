@@ -5,6 +5,7 @@ ruby '3.2.2'
 
 gem 'ahoy_matey'
 gem 'aws-sdk-s3', require: false
+gem 'bootsnap', require: false
 gem 'devise'
 gem 'image_processing'
 gem 'importmap-rails'
