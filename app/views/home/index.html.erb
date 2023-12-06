@@ -3,7 +3,9 @@
                 url: uploads_path,
                 data: { controller: "form", action: "input->form#submit" },
                 class: "flex" do |form| %>
-    <%= form.label :image, class: "btn btn-primary capitalize w-full" %>
+    <%= form.label :image,
+                   "Upload image",
+                   class: "block p-2 whitespace-nowrap cursor-pointer w-full normal-case font-semibold tracking-wide text-sm hover:text-indigo-600" %>
     <%= form.file_field :image, class: "sr-only" %>
   <% end %>
 <% end %>

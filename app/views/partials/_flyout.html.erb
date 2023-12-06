@@ -1,0 +1,21 @@
+<div
+  data-controller="flyout"
+  data-action="click@window->flyout#hide"
+  class="relative flex">
+  <button
+    data-action="flyout#toggle"
+    type="button"
+    class="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 dark:text-white border-2 border-gray-900 dark:border-white rounded-full p-1.5 active:bg-gray-200"
+    aria-expanded="false">
+    <div><%= render "svg/ellipsis" %></div>
+  </button>
+  <div
+    data-flyout-target="menu"
+    class="opacity-0 translate-y-1 absolute right-0 top-6 z-20 mt-5 flex">
+    <div
+      data-flyout-target="links"
+      class="hidden min-w-[14rem] shrink rounded-xl bg-white p-4 text-sm font-semibold leading-6 text-gray-900 shadow-lg ring-1 ring-gray-900/5">
+      <%= yield %>
+    </div>
+  </div>
+</div>

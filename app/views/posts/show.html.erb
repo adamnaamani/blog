@@ -1,12 +1,10 @@
 <%= render "partials/header" do %>
   <% if user_signed_in? %>
-    <%= link_to "Edit", edit_post_path(@post), class: "btn" %>
-    <%= link_to "Delete", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn" %>
+    <%= link_to "Edit", edit_post_path(@post), class: "block p-2 hover:text-indigo-600 whitespace-nowrap" %>
+    <%= link_to "Delete", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "block p-2 hover:text-indigo-600 whitespace-nowrap" %>
   <% end %>
 <% end %>
 <%= render "partials/container" do %>
   <%= render partial: "posts/post", locals: { post: @post } %>
 <% end %>
-<% if @post&.published? %>
-  <%= render "partials/footer" %>
-<% end %>
+<%= render "partials/footer" %>

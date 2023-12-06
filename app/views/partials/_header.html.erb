@@ -7,12 +7,14 @@
       <h1 class="text-sm font-light uppercase tracking-wider"><%= t('name') %></h1>
     <% end %>
   </div>
-  <% if user_signed_in? %>
-    <div class="fixed top-5 right-5 flex flex-col text-center space-y-2 z-10">
-      <%= yield %>
-      <%= link_to "New Post", new_post_path, class: "btn btn-primary" %>
-      <%= link_to "Drafts", drafts_path, class: "btn btn-primary" %>
-      <%= link_to "Logout", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "btn btn-primary" %>
+  <% if user_signed_in? && current_user.admin? %>
+    <div class="fixed top-5 right-5 flex flex-col text-left space-y-2 z-10">
+      <%= render "partials/flyout" do %>
+        <%= yield %>
+        <%= link_to "New Post", new_post_path, class: "block p-2 hover:text-indigo-600 whitespace-nowrap" %>
+        <%= link_to "Drafts", drafts_path, class: "block p-2 hover:text-indigo-600 whitespace-nowrap" %>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "block p-2 hover:text-indigo-600 whitespace-nowrap" %>
+      <% end %>
     </div>
   <% end %>
 </header>
