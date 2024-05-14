@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :home
-  resources :now
+  resources :nows
   resources :posts do
     get :drafts, on: :collection
     post :save, on: :member

@@ -1,0 +1,8 @@
+<%= render "partials/header" %>
+<%= render "partials/container" do %>
+  <h1>What I'm Doing Now</h1>
+  <% if @nows.present? %>
+    <%= @nows.content %>
+  <% end %>
+  <%= render "partials/footer" %>
+<% end %>

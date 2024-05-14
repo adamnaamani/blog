@@ -6,7 +6,7 @@ class UploadsController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.update(:uploads, partial: "uploads/uploads", locals: { uploads: })
+          turbo_stream.update(:uploads, partial: 'uploads/uploads', locals: { uploads: })
         ]
       end
     end
@@ -22,7 +22,7 @@ class UploadsController < ApplicationController
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.update(:uploads, partial: "uploads/uploads", locals: { uploads: })
+          turbo_stream.update(:uploads, partial: 'uploads/uploads', locals: { uploads: })
         ]
       end
     end
@@ -46,7 +46,7 @@ class UploadsController < ApplicationController
   private
 
   def uploads
-    @uploads ||= Upload.all
+    @uploads ||= Upload.all.order(created_at: :desc)
   end
 
   def permitted_params

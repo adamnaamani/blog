@@ -2,8 +2,6 @@ module Postable
   extend ActiveSupport::Concern
 
   included do
-    skip_before_action :authenticate_user!, only: %i[index show]
-
     def save
       @post = current_user.posts.find(params[:id])
 

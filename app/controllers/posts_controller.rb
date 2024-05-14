@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   include Postable
 
+  skip_before_action :authenticate_user!, only: %i[index show]
   after_action :track_action, only: %i[index show]
 
   def index
