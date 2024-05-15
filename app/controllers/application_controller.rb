@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
-  include Pagy::Backend
   include Authenticatable
   include Searchable
   include Trackable
+  include Paginatable
 end

@@ -19,12 +19,13 @@ module Postable
                    .with_rich_text_content_and_embeds
                    .with_attached_images
                    .order(created_at: :desc)
+                   .page(page)
 
       redirect_to root_url and return unless posts.any?
 
       title 'Drafts'
 
-      @pagy, @posts = pagy(posts)
+      posts
       respond_to do |format|
         format.html do
           render template: 'posts/index'

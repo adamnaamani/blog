@@ -3,9 +3,6 @@ import { Controller } from '@hotwired/stimulus'
 export default class extends Controller {
   static targets = [ "menu", "links" ]
 
-  connect() {
-  }
-
   toggle(event) {
     event.preventDefault()
     event.stopPropagation()

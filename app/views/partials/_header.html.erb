@@ -12,7 +12,7 @@
       <%= render "partials/flyout" do %>
         <%= yield %>
         <%= link_to "New Post", new_post_path, class: "block p-2 hover:text-indigo-600 whitespace-nowrap" %>
-        <%= link_to "Drafts", drafts_path, class: "block p-2 hover:text-indigo-600 whitespace-nowrap" %>
+        <%= link_to "Drafts", "/drafts", class: "block p-2 hover:text-indigo-600 whitespace-nowrap" %>
         <%= link_to "Logout", destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "block p-2 hover:text-indigo-600 whitespace-nowrap" %>
       <% end %>
     </div>

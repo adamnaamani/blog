@@ -9,7 +9,7 @@ class PostsController < ApplicationController
 
     title 'Blog'
 
-    @pagy, @posts = pagy(posts)
+    posts
     respond_to do |format|
       format.html
     end
@@ -83,6 +83,7 @@ class PostsController < ApplicationController
                    .with_rich_text_content_and_embeds
                    .with_attached_images
                    .order(published_date: :desc)
+                   .page(page)
   end
 
   def post

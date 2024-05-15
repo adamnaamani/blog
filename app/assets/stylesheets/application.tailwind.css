@@ -99,27 +99,3 @@ pre {
     font-size: 0;
   }
 }
-
-
-/* Pagination */
-.pagy-nav.pagination {
-  @apply isolate inline-flex -space-x-px rounded-md shadow-sm;
-}
-.page.next a {
-  @apply inline-flex items-center rounded-r-md border border-gray-300 px-2 py-2 text-sm font-medium;
-}
-.page.prev a {
-  @apply inline-flex items-center rounded-l-md border border-gray-300 px-2 py-2 text-sm font-medium;
-}
-.page.next.disabled {
-  @apply inline-flex items-center rounded-r-md border border-gray-300 px-2 py-2 text-sm font-medium;
-}
-.page.prev.disabled {
-  @apply inline-flex items-center rounded-l-md border border-gray-300 px-2 py-2 text-sm font-medium;
-}
-.page a, .page.gap {
-  @apply border-gray-300 inline-flex items-center border px-4 py-2 text-sm font-medium;
-}
-.page.active {
-  @apply z-10 border-indigo-500 bg-indigo-50 dark:bg-gray-900 text-indigo-600 inline-flex items-center border px-4 py-2 text-sm font-medium;
-}
