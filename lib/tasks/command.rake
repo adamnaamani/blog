@@ -1,6 +1,4 @@
 namespace :command do
-  require 'csv'
-
   desc 'Run database command'
   task run: :environment do
     file = URI.open('https://naamani.s3.ca-central-1.amazonaws.com/json/posts.json').read
