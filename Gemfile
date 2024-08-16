@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
 
-ruby '3.2.2'
+ruby '3.3.4'
 
 gem 'ahoy_matey'
 gem 'aws-sdk-s3', require: false
@@ -13,7 +13,7 @@ gem 'kaminari'
 gem 'nokogiri'
 gem 'pg'
 gem 'puma'
-gem 'rails', '~> 7.1.1'
+gem 'rails', '~> 7.2.0'
 gem 'redis'
 gem 'sprockets-rails'
 gem 'stimulus-rails'
