@@ -1,5 +1,5 @@
 <%= form_with model: @post,
-              data: { controller: "form", action: "input->form#save", form_scope_value: "post", form_url_value: save_post_path(@post) },
+              data: { controller: "form unload", form_scope_value: "post" },
               class: "hidden max-w-3xl m-auto" do |form| %>
   <div class="bg-white dark:bg-gray-700 shadow-xl">
     <div class="p-6 min-h-screen">
@@ -22,7 +22,7 @@
         <% end %>
         <p data-form-target="count" class="mt-2 text-sm text-gray-500"></p>
       </div>
-      <div>
+      <div class="flex space-x-2">
         <%= form.submit class: "btn" %>
         <%= form.button @post.published? ? "Draft" : "Publish",
                         type: :submit,
@@ -30,6 +30,7 @@
                         value: @post.published? ? :draft : :published,
                         data: { turbo_confirm: "Are you sure you want to #{@post.published? ? "draft" : "publish"} this post?" },
                         class: "btn" %>
+        <%= form.datetime_field :published_date %>
       </div>
     </div>
   </div>

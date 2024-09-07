@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     delete :purge_attachment, on: :collection
   end
 
-  get '/blog', to: 'posts#index'
-  get '/drafts', to: 'posts#drafts'
-  get '/:slug', to: 'posts#show'
+  get "/blog", to: "posts#index"
+  get "/drafts", to: "posts#drafts"
+  get "/:slug", to: "posts#show"
 end

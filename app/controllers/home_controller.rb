@@ -4,6 +4,7 @@ class HomeController < ApplicationController
 
   def index
     posts
+    uploads
   end
 
   private
@@ -11,5 +12,10 @@ class HomeController < ApplicationController
   def posts
     @posts ||= Post.order(published_date: :desc)
                    .limit(10)
+  end
+
+  def uploads
+    @uploads ||= Upload.all
+                       .order(created_at: :desc)
   end
 end

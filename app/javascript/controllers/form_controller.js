@@ -9,11 +9,11 @@ export default class extends Controller {
 
   connect() {
     this.token = document.querySelector("meta[name='csrf-token']").content
-    this.toolbar = document.querySelector('trix-toolbar')
+    this.toolbar = document.querySelector("trix-toolbar")
     this.element.classList.remove("hidden")
 
     if (this.toolbar) {
-      this.toolbar.classList.add('sticky', 'top-0')
+      this.toolbar.classList.add("sticky", "top-0")
     }
     if (this.hasCountTarget) {
       this.count()
@@ -33,12 +33,12 @@ export default class extends Controller {
 
     this.timeout = setTimeout(() => {
       fetch(this.urlValue, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'X-CSRF-Token': this.token,
-          'Content-Type': 'application/json'
+          "X-CSRF-Token": this.token,
+          "Content-Type": "application/json"
         },
-        credentials: 'same-origin',
+        credentials: "same-origin",
         body: JSON.stringify({
           [this.scopeValue]: {
             title: this.titleTarget.value,

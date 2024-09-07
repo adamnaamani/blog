@@ -1,12 +1,11 @@
 <% if local_assigns[:post].present? %>
-  <%= link_to post.slug do %>
-    <div class="rounded-md bg-white border dark:border-slate-700 dark:bg-transparent my-5 px-6 py-6 shadow-sm dark:shadow-lg">
-      <p class="text-gray-500 text-xs">
+  <div>
+    <%= link_to post.slug do %>
+      <h4><%= post.title %></h4>
+      <p class="text-sm">
         <%= post.published_date.to_date.to_fs(:long) if post.published_date.present? %>
       </p>
-      <h4 class="mt-1"><%= post.title %></h4>
-      <p class="text-sm mt-2"><%= post.content.to_plain_text.truncate_words(40) %></p>
-      <div class="text-center mt-4"><%= button_to "Read More", post, class: "border p-2 px-3 rounded-full text-sm" %></div>
-    </div>
-  <% end %>
+      <p class="text-sm mt-2"><%= post.content.to_plain_text.truncate_words(30) %></p>
+    <% end %>
+  </div>
 <% end %>

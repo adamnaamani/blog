@@ -1,18 +1,18 @@
 namespace :command do
-  desc 'Run database command'
+  desc "Run database command"
   task run: :environment do
-    file = URI.open('https://naamani.s3.ca-central-1.amazonaws.com/json/posts.json').read
+    file = URI.open("https://naamani.s3.ca-central-1.amazonaws.com/json/posts.json").read
     object = JSON.parse(file)
-    posts = object['rss']['channel']['item']
+    posts = object["rss"]["channel"]["item"]
 
     posts.each do |post|
       attributes = {
-        post_id: post['post_id'],
-        title: post['title']['__cdata'],
-        slug: post['post_name']['__cdata'],
-        meta: post['postmeta'].map { |k, v| { k['meta_key']['__cdata'] => k['meta_value']['__cdata'] } },
-        published_date: post['pubDate'],
-        content: post['encoded'][0]['__cdata']
+        post_id: post["post_id"],
+        title: post["title"]["__cdata"],
+        slug: post["post_name"]["__cdata"],
+        meta: post["postmeta"].map { |k, v| { k["meta_key"]["__cdata"] => k["meta_value"]["__cdata"] } },
+        published_date: post["pubDate"],
+        content: post["encoded"][0]["__cdata"]
       }
       Post.transaction do
         post = Post.find_or_initialize_by(post_id: attributes[:post_id])
@@ -22,20 +22,20 @@ namespace :command do
     end
   end
 
-  desc 'Run images command'
+  desc "Run images command"
   task images: :environment do
-    file = URI.open('https://naamani.s3.ca-central-1.amazonaws.com/json/media.json').read
+    file = URI.open("https://naamani.s3.ca-central-1.amazonaws.com/json/media.json").read
     object = JSON.parse(file)
-    images = object['rss']['channel']['item']
+    images = object["rss"]["channel"]["item"]
 
     images = images.map do |image|
       {
-        guid: image['guid'],
-        published_date: image['pubDate'],
-        post_id: image['post_id'],
-        post_parent: image['post_parent'],
-        post_name: image['post_name']['__cdata'],
-        filename: image['guid'].to_s.split('/')[-1]
+        guid: image["guid"],
+        published_date: image["pubDate"],
+        post_id: image["post_id"],
+        post_parent: image["post_parent"],
+        post_name: image["post_name"]["__cdata"],
+        filename: image["guid"].to_s.split("/")[-1]
       }
     end
 
@@ -52,17 +52,17 @@ namespace :command do
     end
   end
 
-  desc 'Purge unattached'
+  desc "Purge unattached"
   task purge_unattached: :environment do
     ActiveStorage::Blob.unattached.find_each(&:purge)
   end
 
-  desc 'Export posts'
+  desc "Export posts"
   task export_posts: :environment do
     posts = Post.all
                 .with_rich_text_content
                 .map { |p| { article: ActionView::Base.full_sanitizer.sanitize(p.content.body).delete("\n").squish } }
 
-    File.write('posts.json', JSON.pretty_generate(posts))
+    File.write("posts.json", JSON.pretty_generate(posts))
   end
 end

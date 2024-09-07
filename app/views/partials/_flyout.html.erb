@@ -5,7 +5,7 @@
   <button
     data-action="flyout#toggle"
     type="button"
-    class="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900 dark:text-white border-2 border-gray-900 dark:border-white rounded-full p-1.5 active:bg-gray-200"
+    class="inline-flex items-center gap-x-1 rounded-full p-1.5 hover:bg-slate-100 dark:hover:bg-slate-700"
     aria-expanded="false">
     <div><%= render "svg/ellipsis" %></div>
   </button>
@@ -14,7 +14,7 @@
     class="opacity-0 translate-y-1 absolute right-0 top-6 z-20 mt-5 flex">
     <div
       data-flyout-target="links"
-      class="min-w-[14rem] shrink rounded-xl bg-white p-4 text-sm font-semibold leading-6 text-gray-900 shadow-lg ring-1 ring-gray-900/5">
+      class="flex flex-col space-y-3 min-w-[14rem] shrink rounded-xl bg-white dark:bg-slate-700 p-4 shadow-lg ring-1 ring-gray-900/5">
       <%= yield %>
     </div>
   </div>

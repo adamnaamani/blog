@@ -9,29 +9,29 @@ module Searchable
     end
 
     def title(args = nil)
-      @title = [args.presence, I18n.t('seo.title')].reject(&:blank?).join(" | ")
+      @title = [ args.presence, I18n.t("seo.title") ].reject(&:blank?).join(" | ")
     end
 
     def description(args = nil)
-      @description = args.presence || I18n.t('seo.description')
+      @description = args.presence || I18n.t("seo.description")
     end
 
     def breadcrumb_schema
       {
-        '@context': I18n.t('seo.context'),
-        '@type': 'BreadcrumbList',
+        '@context': I18n.t("seo.context"),
+        '@type': "BreadcrumbList",
         itemListElement: [
           {
-            '@type': 'ListItem',
+            '@type': "ListItem",
             'position': 1,
-            'name': '',
-            'item': ''
+            'name': "",
+            'item': ""
           },
           {
-            '@type': 'ListItem',
+            '@type': "ListItem",
             'position': 2,
-            'name': '',
-            'item': ''
+            'name': "",
+            'item': ""
           }
         ]
       }
@@ -39,9 +39,9 @@ module Searchable
 
     def default_schema
       {
-        '@context': I18n.t('seo.context'),
-        name: I18n.t('seo.title'),
-        description: I18n.t('seo.description')
+        '@context': I18n.t("seo.context"),
+        name: I18n.t("seo.title"),
+        description: I18n.t("seo.description")
       }
     end
 
@@ -57,18 +57,18 @@ module Searchable
         image: [],
         datePublished: @post.published_date,
         dateModified: @post.updated_at,
-        author: [{
+        author: [ {
             "@type": "Person",
-            "name": I18n.t('name'),
-            "url": I18n.t('website')
-          }]
+            "name": I18n.t("name"),
+            "url": I18n.t("website")
+          } ]
       }
     end
 
     def json_ld
-      if action_name == 'index'
+      if action_name == "index"
         render html: "<script type='application/ld+json'>#{default_schema.to_json}</script>".html_safe
-      elsif action_name == 'show'
+      elsif action_name == "show"
         render html: "<script type='application/ld+json'>#{blog_posting_schema.to_json}</script>".html_safe
       else
         render html: "<script type='application/ld+json'>#{default_schema.to_json}</script>".html_safe
@@ -76,14 +76,14 @@ module Searchable
     end
 
     def seo_tags
-      render partial: 'partials/seo'
+      render partial: "partials/seo"
     end
 
     def canonical_tag
-      if controller_name == 'posts' && action_name == 'show'
-        [request.base_url, @post.slug].join('/') if @post.present?
+      if controller_name == "posts" && action_name == "show"
+        [ request.base_url, @post.slug ].join("/") if @post.present?
       else
-        url_for(only_path: false, protocol: 'https')
+        url_for(only_path: false, protocol: "https")
       end
     end
   end

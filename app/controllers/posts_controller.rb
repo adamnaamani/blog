@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   def index
     redirect_to root_url and return unless posts.any?
 
-    title 'Blog'
+    title "Blog"
 
     posts
     respond_to do |format|
@@ -21,29 +21,17 @@ class PostsController < ApplicationController
 
     title post.title
     description post.description
-
-    respond_to do |format|
-      format.html
-    end
   end
 
   def new
     @post = current_user.posts.new
-    post.save(validate: false)
-
-    redirect_to edit_post_path(post)
   end
 
   def create
     @post = current_user.posts.new(permitted_params)
     post.save
 
-    respond_to do |format|
-      format.turbo_stream do
-        redirect_to post_path(post)
-      end
-      format.html
-    end
+    redirect_to "/#{post.slug}"
   end
 
   def edit
@@ -57,9 +45,7 @@ class PostsController < ApplicationController
 
     save_post
 
-    flash[:notice] = 'Post updated'
-
-    redirect_to "/#{post.slug}"
+    redirect_to "/#{post.slug}", notice: "Post updated"
   end
 
   def destroy
@@ -79,20 +65,22 @@ class PostsController < ApplicationController
   private
 
   def posts
-    @posts ||= Post.published
-                   .with_rich_text_content_and_embeds
-                   .with_attached_images
-                   .order(published_date: :desc)
-                   .page(page)
+    @posts ||= current_user.posts
+                           .published
+                           .with_rich_text_content_and_embeds
+                           .with_attached_images
+                           .order(published_date: :desc)
+                           .page(page)
   end
 
   def post
-    @post ||= Post.with_rich_text_content_and_embeds
-                  .with_attached_images
-                  .find_by(slug: params[:slug])
+    @post ||= current_user.posts
+                          .with_rich_text_content_and_embeds
+                          .with_attached_images
+                          .find_by(slug: params[:slug])
   end
 
   def permitted_params
-    params.require(:post).permit(:slug, :title, :content)
+    params.require(:post).permit(:slug, :title, :content, :published_date)
   end
 end
