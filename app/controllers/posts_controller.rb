@@ -65,19 +65,17 @@ class PostsController < ApplicationController
   private
 
   def posts
-    @posts ||= current_user.posts
-                           .published
-                           .with_rich_text_content_and_embeds
-                           .with_attached_images
-                           .order(published_date: :desc)
-                           .page(page)
+    @posts ||= Post.published
+                   .with_rich_text_content_and_embeds
+                   .with_attached_images
+                   .order(published_date: :desc)
+                   .page(page)
   end
 
   def post
-    @post ||= current_user.posts
-                          .with_rich_text_content_and_embeds
-                          .with_attached_images
-                          .find_by(slug: params[:slug])
+    @post ||= Post.with_rich_text_content_and_embeds
+                  .with_attached_images
+                  .find_by(slug: params[:slug])
   end
 
   def permitted_params
