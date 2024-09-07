@@ -56,4 +56,13 @@ namespace :command do
   task purge_unattached: :environment do
     ActiveStorage::Blob.unattached.find_each(&:purge)
   end
+
+  desc 'Export posts'
+  task export_posts: :environment do
+    posts = Post.all
+                .with_rich_text_content
+                .map { |p| { article: ActionView::Base.full_sanitizer.sanitize(p.content.body).delete("\n").squish } }
+
+    File.write('posts.json', JSON.pretty_generate(posts))
+  end
 end
