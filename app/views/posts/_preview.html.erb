@@ -1,11 +1,5 @@
 <% if local_assigns[:post].present? %>
-  <div>
-    <%= link_to post.slug do %>
-      <h4><%= post.title %></h4>
-      <p class="text-sm">
-        <%= post.published_date.to_date.to_fs(:long) if post.published_date.present? %>
-      </p>
-      <p class="text-sm mt-2"><%= post.content.to_plain_text.truncate_words(30) %></p>
-    <% end %>
-  </div>
+  <%= link_to post.slug, class: "block w-fit" do %>
+    <%= post.title %>
+  <% end %>
 <% end %>
