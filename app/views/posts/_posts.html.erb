@@ -1,6 +1,6 @@
 <% if @posts.any? %>
   <h1 class="mb-2">Articles</h1>
-  <div class="space-y-1">
+  <div class="space-y-2 truncate whitespace-nowrap text-ellipsis">
     <% @posts.each do |post| %>
       <%= render partial: "posts/preview", locals: { post: } %>
     <% end %>

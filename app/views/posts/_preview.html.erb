@@ -1,5 +1,5 @@
 <% if local_assigns[:post].present? %>
-  <%= link_to post.slug, class: "block w-fit" do %>
+  <%= link_to post.slug, class: "block truncate" do %>
     <%= post.title %>
   <% end %>
 <% end %>
