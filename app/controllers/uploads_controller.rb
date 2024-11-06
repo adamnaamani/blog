@@ -3,13 +3,6 @@ class UploadsController < ApplicationController
 
   def index
     uploads
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.update(:uploads, partial: "uploads/uploads", locals: { uploads: })
-        ]
-      end
-    end
   end
 
   def create
@@ -19,13 +12,7 @@ class UploadsController < ApplicationController
     )
     upload.image.attach(permitted_params[:image])
 
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: [
-          turbo_stream.update(:uploads, partial: "uploads/uploads", locals: { uploads: })
-        ]
-      end
-    end
+    redirect_to request.referrer
   end
 
   def purge_attachment
