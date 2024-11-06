@@ -14,7 +14,7 @@
   <div class="space-y-10">
     <div id="bio">
       <p>
-        Owner of <%= link_to "Naamani Real Estate", t("nre"), class: "decorated" %>. Agent with <%= link_to "eXp Realty", t("exp"), class: "decorated" %>. Entrepreneur specialized in <%= link_to "Proptech", t("github"), class: "decorated" %>. Currently building <%= link_to "Resider", "https://resider.ca", class: "decorated" %> and <%= link_to "deal management software", "https://rebase-3d8f880abf9e.herokuapp.com", class: "decorated" %>. Subscribe to my <%= link_to "newsletter", t('newsletter'), class: "decorated" %> where you can follow my thinking on real estate, urbanism, tech, and business. Connect with me on <%= link_to "X", t("x"), class: "decorated" %>, <%= link_to "Instagram", t("instagram"), class: "decorated" %>, <%= link_to "LinkedIn", t("linkedin"), class: "decorated" %>, and <%= link_to "Email", "mailto:#{t("email")}", data: { turbo: false }, class: "decorated" %>.
+        Owner of <%= link_to "Naamani Real Estate", t("nre"), class: "decorated" %>. Agent with <%= link_to "eXp Realty", t("exp"), class: "decorated" %>. Entrepreneur specialized in <%= link_to "Proptech", t("github"), class: "decorated" %>. Currently building <%= link_to "Resider", "https://resider.ca", class: "decorated" %> and <%= link_to "Rebase", "https://rebase-3d8f880abf9e.herokuapp.com", class: "decorated" %>. Subscribe to my <%= link_to "newsletter", t('newsletter'), class: "decorated" %> where you can follow my thinking on real estate, urbanism, tech, and business. Connect with me on <%= link_to "X", t("x"), class: "decorated" %>, <%= link_to "Instagram", t("instagram"), class: "decorated" %>, <%= link_to "LinkedIn", t("linkedin"), class: "decorated" %>, and <%= link_to "Email", "mailto:#{t("email")}", data: { turbo: false }, class: "decorated" %>.
       </p>
     </div>
     <div id="articles">
@@ -24,6 +24,29 @@
       <div class="space-y-2 truncate whitespace-nowrap text-ellipsis">
         <% @posts.published.each do |post| %>
           <p><%= link_to post.title, post.slug %></p>
+        <% end %>
+      </div>
+    </div>
+    <div id="photos">
+      <h2 class="flex justify-between mb-2">
+        Photos
+      </h2>
+      <div class="grid grid-cols-3 sm:grid-cols-4 gap-1">
+        <% @uploads.each do |upload| %>
+          <div id="<%= dom_id(upload) %>" class="relative h-28 lg:h-40">
+            <%= link_to upload.image.url do %>
+              <%= image_tag upload.image.url,
+                            loading: :lazy,
+                            class: "shadow bg-slate-200 w-full h-28 lg:h-40" %>
+            <% end %>
+            <% if user_signed_in? && current_user.admin? %>
+              <%= link_to purge_attachment_uploads_path(id: upload.id),
+                          data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this image?" },
+                          class: "absolute bottom-2 right-2 text-transparent hover:text-red-400" do %>
+                <%= render "svg/trash" %>
+              <% end %>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>
@@ -55,29 +78,6 @@
         <% end %>
         <%= link_to "https://read.amazon.ca/kp/embed?asin=B09YY9W9B3&preview=newtab&linkCode=kpe&ref_=kip_embed_taf_preview_F7MYZW977K41ZESGZBJZ&tag=naamani00-20", target: "_blank" do %>
           <%= image_tag "https://m.media-amazon.com/images/I/510-R80H69L._SL1500_.jpg", class: "w-full h-full" %>
-        <% end %>
-      </div>
-    </div>
-    <div id="photos">
-      <h2 class="flex justify-between mb-2">
-        Photos
-      </h2>
-      <div class="grid grid-cols-3 sm:grid-cols-4 gap-1">
-        <% @uploads.each do |upload| %>
-          <div id="<%= dom_id(upload) %>" class="relative h-28 lg:h-40">
-            <%= link_to upload.image.url do %>
-              <%= image_tag upload.image.url,
-                            loading: :lazy,
-                            class: "shadow bg-slate-200 w-full h-28 lg:h-40" %>
-            <% end %>
-            <% if user_signed_in? && current_user.admin? %>
-              <%= link_to purge_attachment_uploads_path(id: upload.id),
-                          data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this image?" },
-                          class: "absolute bottom-2 right-2 text-transparent hover:text-red-400" do %>
-                <%= render "svg/trash" %>
-              <% end %>
-            <% end %>
-          </div>
         <% end %>
       </div>
     </div>
