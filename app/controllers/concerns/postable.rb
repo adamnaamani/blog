@@ -32,6 +32,14 @@ module Postable
       end
     end
 
+    def upload
+      @post = current_user.posts.find(params[:id])
+
+      post.images.attach(permitted_params[:images].compact_blank)
+
+      redirect_to request.referrer
+    end
+
     def purge_attachment
       return unless current_user.admin?
 

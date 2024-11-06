@@ -1,6 +1,15 @@
 <%= render "partials/header" do %>
   <%= link_to "Edit", edit_post_path(@post) %>
   <%= link_to "Delete", post_path(@post), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+  <%= form_with url: upload_post_path(@post),
+                scope: :post,
+                data: { controller: "form", action: "input->form#submit" },
+                class: "flex" do |form| %>
+    <%= form.label :images,
+                   "Upload",
+                   class: "block cursor-pointer w-full normal-case text-base" %>
+    <%= form.file_field :images, multiple: true, class: "sr-only" %>
+  <% end %>
 <% end %>
 
 <%= render "partials/container" do %>

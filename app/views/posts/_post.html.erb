@@ -11,10 +11,19 @@
       </div>
     </div>
     <% if post.images.attached? %>
-      <%= image_tag post.images.first,
-                    width: post.images.first.metadata['width'],
-                    height: post.images.first.metadata['height'],
-                    class: "mb-5" %>
+      <div class="relative">
+        <%= image_tag post.images.first,
+                      width: post.images.first.metadata['width'],
+                      height: post.images.first.metadata['height'],
+                      class: "mb-5" %>
+        <% if user_signed_in? && current_user.admin? %>
+          <%= link_to purge_attachment_posts_path(id: post.images.first.id),
+                      data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this image?" },
+                      class: "absolute bottom-2 right-2 text-transparent hover:text-red-400" do %>
+            <%= render "svg/trash" %>
+          <% end %>
+        <% end %>
+      </div>
     <% end %>
     <%= post.content %>
     <% if post.images.attached? %>

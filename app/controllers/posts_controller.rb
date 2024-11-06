@@ -79,6 +79,6 @@ class PostsController < ApplicationController
   end
 
   def permitted_params
-    params.require(:post).permit(:slug, :title, :content, :published_date)
+    params.require(:post).permit(:slug, :title, :content, :published_date, images: [])
   end
 end

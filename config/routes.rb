@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :posts do
     get :drafts, on: :collection
     post :save, on: :member
+    post :upload, on: :member
     delete :purge_attachment, on: :collection
   end
   resources :posts, param: :slug
