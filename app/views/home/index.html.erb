@@ -21,9 +21,9 @@
       <h2 class="flex justify-between mb-2">
         Articles <%= link_to "See all", blog_path, class: "text-base decorated" %>
       </h2>
-      <div class="space-y-2 truncate whitespace-nowrap text-ellipsis">
+      <div class="whitespace-nowrap text-ellipsis">
         <% @posts.published.each do |post| %>
-          <p><%= link_to post.title, post.slug %></p>
+          <p class="truncate"><%= link_to post.title, post.slug %></p>
         <% end %>
       </div>
     </div>
