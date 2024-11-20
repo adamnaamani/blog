@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     delete :purge_attachment, on: :collection
   end
 
+  get "up", to: "rails/health#show", as: :rails_health_check
   get "/blog", to: "posts#index"
   get "/drafts", to: "posts#drafts"
   get "/:slug", to: "posts#show"
