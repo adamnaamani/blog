@@ -53,7 +53,7 @@ input[type=email],
 input[type=password],
 input[type=tel],
 input[type=search],
-input[type=date]
+input[type=date],
 input[type=datetime-local],
 textarea,
 textarea[multiple=multiple] {
@@ -61,9 +61,6 @@ textarea[multiple=multiple] {
   border-0 ring-inset ring-gray-200 ring-1 focus:ring-2 focus:ring-inset focus:ring-indigo-600 focus:border-indigo-600
   dark:ring-0 dark:focus:border-transparent dark:focus:ring-transparent
   bg-gray-50 dark:bg-slate-700 focus:bg-white dark:focus:bg-slate-600;
-}
-input[type=checkbox] {
-	@apply w-4 h-4 border border-gray-300 shadow-sm rounded;
 }
 input[type=radio] {
 	@apply border border-gray-300 shadow-sm;
