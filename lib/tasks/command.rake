@@ -59,9 +59,16 @@ namespace :command do
 
   desc "Export posts"
   task export_posts: :environment do
-    posts = Post.all
+    posts = Post.published
+                .order(created_at: :desc)
                 .with_rich_text_content
-                .map { |p| { article: ActionView::Base.full_sanitizer.sanitize(p.content.body).delete("\n").squish } }
+                .map do |post|
+                  {
+                    tite: post.title,
+                    post: ActionView::Base.full_sanitizer.sanitize(post.content.body.to_s),
+                    published: post.published_date
+                  }
+                end
 
     File.write("posts.json", JSON.pretty_generate(posts))
   end
