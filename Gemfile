@@ -15,10 +15,11 @@ gem "nokogiri"
 gem "pg"
 gem "propshaft"
 gem "puma"
-gem "rails", "~> 8.0.0"
+gem "rails", "~> 8.0.2"
 gem "redis"
 gem "stimulus-rails"
-gem "tailwindcss-rails"
+gem "tailwindcss-rails", "~> 3.0.0"
+gem "tailwindcss-ruby", "~> 3.4.15"
 gem "thruster", require: false
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
