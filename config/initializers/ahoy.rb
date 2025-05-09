@@ -9,10 +9,13 @@ Ahoy.api = false
 # see https://github.com/ankane/ahoy#geocoding
 Ahoy.geocode = false
 
-# Skip tracking for sensitive URLs
+# Only track visits to existing blog posts
 Ahoy.exclude_method = lambda do |controller, request|
-  sensitive_extensions = %w[yaml json php sql env]
-  wp_content = %r{^/wp-content/}
+  # For blog post URLs, check if the post exists
+  if request.path.start_with?('/')
+    slug = request.path[1..] # Remove leading slash
+    return true unless Post.exists?(slug: slug)
+  end
 
-  request.path =~ wp_content || sensitive_extensions.any? { |ext| request.path.end_with?(".#{ext}") }
+  true # Don't track any other URLs
 end

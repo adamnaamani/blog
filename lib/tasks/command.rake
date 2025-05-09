@@ -73,76 +73,24 @@ namespace :command do
     File.write("posts.json", JSON.pretty_generate(posts))
   end
 
-  desc "Clean up Ahoy entries that don't match valid paths"
+  desc "Delete Ahoy visits that aren't for existing blog posts"
   task cleanup_ahoy: :environment do
     dry_run = ENV["DRY_RUN"] == "true"
     puts "Running in #{dry_run ? 'DRY RUN' : 'LIVE'} mode"
 
-    # Get all valid paths from routes
-    valid_paths = [
-      "/",                    # root
-      "/blog",               # blog index
-      "/drafts",             # drafts
-      "/up",                 # health check
-      "/users/sign_in",      # devise
-      "/users/sign_out",     # devise
-      "/users/password/new", # devise
-      "/users/password",     # devise
-      "/users/confirmation", # devise
-      "/uploads",            # uploads
-      "/nows",               # nows
-      "/subscribers"         # subscribers
-    ]
-
-    # Add all post slugs
-    post_slugs = Post.pluck(:slug)
-    valid_paths += post_slugs
-
-    puts "\nValid paths:"
-    valid_paths.each { |path| puts "  - #{path}" }
-    puts "\nTotal valid paths: #{valid_paths.count}"
-
-    # Get all Ahoy visits
+    # Get all visits
     visits = Ahoy::Visit.all
     puts "\nTotal visits: #{visits.count}"
 
-    # Find visits with invalid paths
+    # Find visits that aren't for existing blog posts
     invalid_visits = visits.select do |visit|
-      # First check the landing page
-      landing_page_invalid = if visit.landing_page.present?
-        !valid_paths.any? { |valid_path| visit.landing_page.include?(valid_path) }
+      # Check landing page
+      if visit.landing_page.present?
+        slug = visit.landing_page[1..] # Remove leading slash
+        !Post.exists?(slug: slug)
       else
-        false
+        true # No landing page, consider invalid
       end
-
-      puts "\nChecking visit #{visit.id}"
-      puts "  - Landing page: #{visit.landing_page} (#{landing_page_invalid ? 'invalid' : 'valid'})" if visit.landing_page.present?
-
-      # Then check associated events
-      events = Ahoy::Event.where(visit_id: visit.id)
-      puts "  - Events: #{events.count}"
-
-      events_invalid = events.any? do |event|
-        # Extract path from properties
-        path = if event.properties["path"].present?
-          event.properties["path"]
-        elsif event.properties["slug"].present?
-          "/#{event.properties["slug"]}"
-        elsif event.properties["controller"].present? && event.properties["action"].present?
-          "/#{event.properties["controller"]}/#{event.properties["action"]}"
-        end
-
-        if path.present?
-          is_valid = valid_paths.any? { |valid_path| path.start_with?(valid_path) }
-          puts "    - Event path: #{path} (#{is_valid ? 'valid' : 'invalid'})"
-          !is_valid
-        else
-          puts "    - No path found in event properties: #{event.properties.inspect}"
-          false
-        end
-      end
-
-      landing_page_invalid || events_invalid
     end
 
     # Show what would be deleted
@@ -151,18 +99,6 @@ namespace :command do
       invalid_visits.each do |visit|
         puts "\nVisit #{visit.id}:"
         puts "  - Landing page: #{visit.landing_page}" if visit.landing_page.present?
-
-        events = Ahoy::Event.where(visit_id: visit.id)
-        events.each do |event|
-          path = if event.properties["path"].present?
-            event.properties["path"]
-          elsif event.properties["slug"].present?
-            "/#{event.properties["slug"]}"
-          elsif event.properties["controller"].present? && event.properties["action"].present?
-            "/#{event.properties["controller"]}/#{event.properties["action"]}"
-          end
-          puts "  - Event: #{path || 'No path'} (#{event.properties.inspect})"
-        end
       end
     else
       puts "\nNo invalid visits found"
@@ -173,7 +109,7 @@ namespace :command do
     else
       # Delete invalid visits and their events
       invalid_visits.each do |visit|
-        puts "Deleting visit #{visit.id} with invalid paths"
+        puts "Deleting visit #{visit.id}"
         Ahoy::Event.where(visit_id: visit.id).delete_all
         visit.destroy
       end
