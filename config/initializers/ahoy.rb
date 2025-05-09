@@ -11,6 +11,9 @@ Ahoy.geocode = false
 
 # Only track visits to existing blog posts
 Ahoy.exclude_method = lambda do |controller, request|
+  # Skip if the path has a file extension or query parameters
+  return true if request.path.include?('.') || request.query_string.present?
+
   # For blog post URLs, check if the post exists
   if request.path.start_with?('/')
     slug = request.path[1..] # Remove leading slash

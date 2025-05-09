@@ -84,9 +84,13 @@ namespace :command do
 
     # Find visits that aren't for existing blog posts
     invalid_visits = visits.select do |visit|
-      # Check landing page
+      # Skip if the landing page has a file extension or query parameters
       if visit.landing_page.present?
-        slug = visit.landing_page[1..] # Remove leading slash
+        uri = URI.parse(visit.landing_page)
+        return true if uri.path.include?('.') || uri.query.present?
+
+        # Check if it's a valid blog post
+        slug = uri.path[1..] # Remove leading slash
         !Post.exists?(slug: slug)
       else
         true # No landing page, consider invalid
