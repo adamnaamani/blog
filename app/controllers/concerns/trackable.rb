@@ -11,7 +11,7 @@ module Trackable
     def track_action
       return if user_signed_in? && current_user.admin?
 
-      ahoy.track "Ran action", request.path_parameters
+      ahoy.track "Ran action", { path: request.fullpath }
     end
   end
 end
