@@ -4,9 +4,6 @@ end
 # Enable JavaScript tracking
 Ahoy.api = true
 
-# Track visits immediately
-Ahoy.track_visits_immediately = true
-
 # set to true for geocoding (and add the geocoder gem to your Gemfile)
 # we recommend configuring local geocoding as well
 # see https://github.com/ankane/ahoy#geocoding
