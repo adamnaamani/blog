@@ -9,15 +9,15 @@ Ahoy.api = false
 # see https://github.com/ankane/ahoy#geocoding
 Ahoy.geocode = false
 
-# Only track visits to existing blog posts
+# Track all blog posts and exclude assets/non-blog content
 Ahoy.exclude_method = lambda do |controller, request|
-  # Skip if the path has a file extension or query parameters
+  # Skip if the path has a file extension (assets) or query parameters
   return true if request.path.include?('.') || request.query_string.present?
 
-  # For blog post URLs, check if the post exists
+  # Track all blog post URLs
   if request.path.start_with?('/')
     slug = request.path[1..] # Remove leading slash
-    return true unless Post.exists?(slug: slug)
+    return false if Post.exists?(slug: slug) # Track if it's a blog post
   end
 
   true # Don't track any other URLs
