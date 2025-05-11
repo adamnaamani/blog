@@ -11,78 +11,73 @@
 <% end %>
 
 <%= render "partials/container" do %>
-  <div class="space-y-16">
-    <div id="bio" class="prose max-w-none">
-      <p class="bio-text">
+  <main class="space-y-16">
+    <section id="bio" class="prose max-w-none">
+      <h1 class="sr-only">Adam Naamani - Real Estate Professional</h1>
+      <p class="bio-text text-slate-600 dark:text-slate-400">
         Owner of <%= link_to "Naamani Real Estate", t("nre"), class: "link-primary" %>. Agent with <%= link_to "eXp Realty", t("exp"), class: "link-primary" %>. Entrepreneur specialized in <%= link_to "Proptech", t("github"), class: "link-primary" %>. Subscribe to my <%= link_to "newsletter", t('newsletter'), class: "link-primary" %> where you can follow my thinking on real estate, urbanism, tech, and business. Connect with me on <%= link_to "X", t("x"), class: "link-primary" %>, <%= link_to "Instagram", t("instagram"), class: "link-primary" %>, <%= link_to "LinkedIn", t("linkedin"), class: "link-primary" %>, and <%= link_to "Email", "mailto:#{t("email")}", data: { turbo: false }, class: "link-primary" %>.
       </p>
-    </div>
+    </section>
 
-    <div id="projects" class="space-y-6">
+    <section id="projects" class="space-y-6">
       <h2 class="section-title">
         <span class="mr-2">Projects</span>
         <div class="section-title-line"></div>
       </h2>
       <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <div class="project-card group">
+        <article class="project-card group shadow-none">
           <%= link_to "https://resider.ca", class: "block", target: "_blank" do %>
             <h3 class="project-title group-hover:text-slate-900 dark:group-hover:text-slate-100 transition-colors duration-200">Resider</h3>
-            <p class="project-description">
-              Real estate search portal covering Greater Vancouver, Fraser Valley, Chilliwack, and Northern BC. Built with VOW data, Bridge, and RESO Web API.
+            <p class="project-description text-slate-600 dark:text-slate-400">
+              Real estate search engine built with VOW data, Bridge, and RESO Web API.
             </p>
           <% end %>
-        </div>
+        </article>
 
-        <div class="project-card group">
+        <article class="project-card group shadow-none">
           <%= link_to "https://rebase-3d8f880abf9e.herokuapp.com", class: "block", target: "_blank" do %>
             <h3 class="project-title group-hover:text-slate-900 dark:group-hover:text-slate-100 transition-colors duration-200">Rebase</h3>
-            <p class="project-description">
-              Manage your real estate deals in one place from end-to-end. Empowers your sales process with AI-driven automation, eliminating inefficiencies and enhancing client collaboration.
+            <p class="project-description text-slate-600 dark:text-slate-400">
+              Real estate deal management and client collaboration with AI automation.
             </p>
           <% end %>
-        </div>
+        </article>
 
-        <div class="project-card group">
+        <article class="project-card group shadow-none">
           <%= link_to "https://realtysimulator.com", class: "block", target: "_blank" do %>
             <h3 class="project-title group-hover:text-slate-900 dark:group-hover:text-slate-100 transition-colors duration-200">Realty Simulator</h3>
-            <p class="project-description">
-              A free-to-play real estate simulator created 100% with AI. Trade properties, build new developments, manage your portfolio, and climb to the top as a real estate tycoon.
+            <p class="project-description text-slate-600 dark:text-slate-400">
+              A free-to-play real estate simulator created 100% with AI, Cursor, and ThreeJS.
             </p>
           <% end %>
-        </div>
+        </article>
       </div>
-    </div>
+    </section>
 
-    <div id="articles" class="space-y-6">
+    <section id="articles" class="space-y-6">
       <%= link_to blog_path, class: "block" do %>
         <h2 class="section-title group">
           <span class="mr-2 group-hover:text-slate-900 dark:group-hover:text-slate-100 transition-colors duration-200">Articles</span>
           <div class="section-title-line"></div>
         </h2>
       <% end %>
-      <div class="article-card">
-        <% @posts.published.each do |post| %>
-          <div class="group py-2">
-            <%= link_to post.slug, class: "block" do %>
-              <div class="w-full flex items-center justify-between">
-                <p class="article-link group-hover:text-slate-900 dark:group-hover:text-slate-100 transition-colors duration-200 truncate">
-                  <%= post.title %>
-                </p>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
+      <div class="article-card shadow-none">
+        <ul class="divide-y divide-gray-100 dark:divide-gray-700">
+          <% @posts.published.each do |post| %>
+            <%= render partial: "posts/preview", locals: { post: } %>
+          <% end %>
+        </ul>
       </div>
-    </div>
+    </section>
 
-    <div id="photos" class="space-y-6">
+    <section id="photos" class="space-y-6">
       <h2 class="section-title">
         <span class="mr-2">Photos</span>
         <div class="section-title-line"></div>
       </h2>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         <% @uploads.each do |upload| %>
-          <div id="<%= dom_id(upload) %>" class="photo-container group">
+          <figure id="<%= dom_id(upload) %>" class="photo-container group">
             <%= link_to upload.image.url, class: "block w-full h-full" do %>
               <div class="relative w-full h-full">
                 <%= image_tag upload.image.url,
@@ -99,12 +94,12 @@
                 <%= render "svg/trash" %>
               <% end %>
             <% end %>
-          </div>
+          </figure>
         <% end %>
       </div>
-    </div>
+    </section>
 
-    <div id="books" class="space-y-6">
+    <section id="books" class="space-y-6">
       <h2 class="section-title">
         <span class="mr-2">Books</span>
         <div class="section-title-line"></div>
@@ -120,13 +115,13 @@
           ["https://read.amazon.ca/kp/embed?asin=B000SEFNMS&preview=newtab&linkCode=kpe&ref_=kip_embed_taf_preview_RVJTTYNGEFSAFFFJCP3D&tag=naamani00-20", "https://m.media-amazon.com/images/I/61A+LdmTESL._SL1200_.jpg"],
           ["https://read.amazon.ca/kp/embed?asin=B09YY9W9B3&preview=newtab&linkCode=kpe&ref_=kip_embed_taf_preview_F7MYZW977K41ZESGZBJZ&tag=naamani00-20", "https://m.media-amazon.com/images/I/510-R80H69L._SL1500_.jpg"]
         ].each do |link, image| %>
-          <div class="book-container group">
+          <figure class="book-container group">
             <%= link_to link, target: "_blank", class: "block h-full" do %>
               <%= image_tag image, class: "book-image group-hover:scale-105 transition-transform duration-300" %>
             <% end %>
-          </div>
+          </figure>
         <% end %>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 <% end %>

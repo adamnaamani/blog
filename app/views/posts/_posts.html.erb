@@ -1,11 +1,16 @@
 <% if @posts.any? %>
-  <h1 class="mb-2">Articles</h1>
-  <div class="whitespace-nowrap text-ellipsis">
-    <ul class="divide-y divide-gray-100 dark:divide-gray-700">
-      <% @posts.each do |post| %>
-        <%= render partial: "posts/preview", locals: { post: } %>
-      <% end %>
-    </ul>
-  </div>
-  <%= render "partials/pagination" %>
+  <section id="articles" class="space-y-6">
+    <h2 class="section-title">
+      <span class="mr-2">Articles</span>
+      <div class="section-title-line"></div>
+    </h2>
+    <div class="article-card shadow-none">
+      <ul class="divide-y divide-gray-100 dark:divide-gray-700">
+        <% @posts.each do |post| %>
+          <%= render partial: "posts/preview", locals: { post: } %>
+        <% end %>
+      </ul>
+    </div>
+    <%= render "partials/pagination" %>
+  </section>
 <% end %>

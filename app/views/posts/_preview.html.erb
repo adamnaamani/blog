@@ -2,9 +2,14 @@
   <li class="group py-2">
     <%= link_to post.slug, class: "block" do %>
       <div class="w-full flex items-center justify-between">
-        <p class="article-link group-hover:text-slate-900 dark:group-hover:text-slate-100 transition-colors duration-200 truncate">
+        <p class="article-link text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-100 transition-colors duration-200 truncate flex-1 mr-4">
           <%= post.title %>
         </p>
+        <% if post.published_date.present? %>
+          <time datetime="<%= post.published_date.iso8601 %>" class="text-sm text-slate-600 dark:text-slate-400 whitespace-nowrap">
+            <%= post.published_date.strftime("%b %d, %Y") %>
+          </time>
+        <% end %>
       </div>
     <% end %>
   </li>
