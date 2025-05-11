@@ -11,38 +11,94 @@
 <% end %>
 
 <%= render "partials/container" do %>
-  <div class="space-y-10">
-    <div id="bio">
-      <p>
-        Owner of <%= link_to "Naamani Real Estate", t("nre"), class: "decorated" %>. Agent with <%= link_to "eXp Realty", t("exp"), class: "decorated" %>. Entrepreneur specialized in <%= link_to "Proptech", t("github"), class: "decorated" %>. Currently building <%= link_to "Resider", "https://resider.ca", class: "decorated" %> and <%= link_to "Rebase", "https://rebase-3d8f880abf9e.herokuapp.com", class: "decorated" %>. Subscribe to my <%= link_to "newsletter", t('newsletter'), class: "decorated" %> where you can follow my thinking on real estate, urbanism, tech, and business. Connect with me on <%= link_to "X", t("x"), class: "decorated" %>, <%= link_to "Instagram", t("instagram"), class: "decorated" %>, <%= link_to "LinkedIn", t("linkedin"), class: "decorated" %>, and <%= link_to "Email", "mailto:#{t("email")}", data: { turbo: false }, class: "decorated" %>.
+  <div class="space-y-16">
+    <div id="bio" class="prose max-w-none">
+      <p class="bio-text">
+        Owner of <%= link_to "Naamani Real Estate", t("nre"), class: "link-primary" %>. Agent with <%= link_to "eXp Realty", t("exp"), class: "link-primary" %>. Entrepreneur specialized in <%= link_to "Proptech", t("github"), class: "link-primary" %>. Subscribe to my <%= link_to "newsletter", t('newsletter'), class: "link-primary" %> where you can follow my thinking on real estate, urbanism, tech, and business. Connect with me on <%= link_to "X", t("x"), class: "link-primary" %>, <%= link_to "Instagram", t("instagram"), class: "link-primary" %>, <%= link_to "LinkedIn", t("linkedin"), class: "link-primary" %>, and <%= link_to "Email", "mailto:#{t("email")}", data: { turbo: false }, class: "link-primary" %>.
       </p>
     </div>
-    <div id="articles">
-      <h2 class="flex justify-between mb-2">
-        Articles <%= link_to "See all", blog_path, class: "text-base decorated" %>
+
+    <div id="projects" class="space-y-6">
+      <h2 class="section-title">
+        <span class="mr-2">Projects</span>
+        <div class="section-title-line"></div>
       </h2>
-      <div class="whitespace-nowrap text-ellipsis">
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div class="project-card group">
+          <%= link_to "https://resider.ca", class: "block", target: "_blank" do %>
+            <h3 class="project-title group-hover:text-slate-900 dark:group-hover:text-slate-100 transition-colors duration-200">Resider</h3>
+            <p class="project-description">
+              Real estate search portal covering Greater Vancouver, Fraser Valley, Chilliwack, and Northern BC. Built with VOW data, Bridge, and RESO Web API.
+            </p>
+          <% end %>
+        </div>
+
+        <div class="project-card group">
+          <%= link_to "https://rebase-3d8f880abf9e.herokuapp.com", class: "block", target: "_blank" do %>
+            <h3 class="project-title group-hover:text-slate-900 dark:group-hover:text-slate-100 transition-colors duration-200">Rebase</h3>
+            <p class="project-description">
+              Manage your real estate deals in one place from end-to-end. Empowers your sales process with AI-driven automation, eliminating inefficiencies and enhancing client collaboration.
+            </p>
+          <% end %>
+        </div>
+
+        <div class="project-card group">
+          <%= link_to "https://realtysimulator.com", class: "block", target: "_blank" do %>
+            <h3 class="project-title group-hover:text-slate-900 dark:group-hover:text-slate-100 transition-colors duration-200">Realty Simulator</h3>
+            <p class="project-description">
+              A free-to-play real estate simulator created 100% with AI. Trade properties, build new developments, manage your portfolio, and climb to the top as a real estate tycoon.
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div id="articles" class="space-y-6">
+      <%= link_to blog_path, class: "block" do %>
+        <h2 class="section-title group">
+          <span class="mr-2 group-hover:text-slate-900 dark:group-hover:text-slate-100 transition-colors duration-200">Articles</span>
+          <div class="section-title-line"></div>
+        </h2>
+      <% end %>
+      <div class="article-card">
         <% @posts.published.each do |post| %>
-          <p class="truncate"><%= link_to post.title, post.slug %></p>
+          <div class="group py-2">
+            <%= link_to post.slug, class: "block" do %>
+              <div class="w-full flex items-center justify-between">
+                <p class="article-link group-hover:text-slate-900 dark:group-hover:text-slate-100 transition-colors duration-200">
+                  <%= post.title %>
+                </p>
+                <p class="text-xs/5 text-gray-500 whitespace-nowrap">
+                  <%= post.published_date.to_date.to_fs(:long) if post.published_date.present? %>
+                </p>
+              </div>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>
-    <div id="photos">
-      <h2 class="flex justify-between mb-2">
-        Photos
+
+    <div id="photos" class="space-y-6">
+      <h2 class="section-title">
+        <span class="mr-2">Photos</span>
+        <div class="section-title-line"></div>
       </h2>
-      <div class="grid grid-cols-3 sm:grid-cols-4 gap-1">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         <% @uploads.each do |upload| %>
-          <div id="<%= dom_id(upload) %>" class="relative h-28 lg:h-40">
-            <%= link_to upload.image.url do %>
-              <%= image_tag upload.image.url,
+          <div id="<%= dom_id(upload) %>" class="photo-container group">
+            <%= link_to upload.image.url, class: "block w-full h-full" do %>
+              <div class="relative w-full h-full">
+                <%= image_tag upload.image.url,
                             loading: :lazy,
-                            class: "shadow bg-slate-200 w-full h-28 lg:h-40" %>
+                            class: "photo-image group-hover:scale-105 transition-transform duration-300 opacity-0",
+                            onload: "this.style.opacity = '1'; this.parentElement.classList.remove('animate-pulse');" %>
+                <div class="photo-loading"></div>
+              </div>
             <% end %>
             <% if user_signed_in? && current_user.admin? %>
               <%= link_to purge_attachment_uploads_path(id: upload.id),
-                          data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this image?" },
-                          class: "absolute bottom-2 right-2 text-transparent hover:text-red-400" do %>
+                        data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this image?" },
+                        class: "absolute bottom-2 right-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 hover:text-red-400 z-10" do %>
                 <%= render "svg/trash" %>
               <% end %>
             <% end %>
@@ -50,34 +106,28 @@
         <% end %>
       </div>
     </div>
-    <div id="books">
-      <h2 class="flex justify-between mb-2">
-        Books
+
+    <div id="books" class="space-y-6">
+      <h2 class="section-title">
+        <span class="mr-2">Books</span>
+        <div class="section-title-line"></div>
       </h2>
-      <div class="grid grid-cols-4 gap-1">
-        <%= link_to "https://read.amazon.ca/kp/embed?asin=B004BDOUAI&preview=newtab&linkCode=kpe&ref_=kip_embed_taf_preview_F2AFKCQ7YCFSJ5SJ4Y1N&tag=naamani00-20", target: "_blank" do %>
-          <%= image_tag "https://m.media-amazon.com/images/I/616BYPbOCyL._SL1500_.jpg", class: "w-full h-full" %>
-        <% end %>
-        <%= link_to "https://a.co/d/gcfDmne", target: "_blank" do %>
-          <%= image_tag "https://m.media-amazon.com/images/I/71HamifdtQL._SL1500_.jpg", class: "w-full h-full" %>
-        <% end %>
-        <%= link_to "https://read.amazon.ca/kp/embed?asin=B01MRLFFQ7&preview=newtab&linkCode=kpe&ref_=kip_embed_taf_preview_HBB6BWPETTRMHV2D81BH&tag=naamani00-20", target: "_blank" do %>
-          <%= image_tag "https://m.media-amazon.com/images/I/61ZScoZzPLL._SL1360_.jpg", class: "w-full h-full" %>
-        <% end %>
-        <%= link_to "https://read.amazon.ca/kp/embed?asin=B07H453KGH&preview=newtab&linkCode=kpe&ref_=kip_embed_taf_preview_Q5WB7BX2NF47EWTMZK68&tag=naamani00-20", target: "_blank" do %>
-          <%= image_tag "https://m.media-amazon.com/images/I/61pDNU9qEGL._SL1360_.jpg", class: "w-full h-full" %>
-        <% end %>
-        <%= link_to "https://read.amazon.ca/kp/embed?asin=B079WV79TK&preview=newtab&linkCode=kpe&ref_=kip_embed_taf_preview_4F3NJGAKQQMGJMZK20Z9&tag=naamani00-20", target: "_blank" do %>
-          <%= image_tag "https://m.media-amazon.com/images/I/81nvF-p7odL._SL1500_.jpg", class: "w-full h-full" %>
-        <% end %>
-        <%= link_to "https://read.amazon.ca/kp/embed?asin=B000FC1JAI&preview=newtab&linkCode=kpe&ref_=kip_embed_taf_preview_01JSSX62S4EXCDFQQ4BR&tag=naamani00-20", target: "_blank" do %>
-          <%= image_tag "https://m.media-amazon.com/images/I/512B-9yFgAL._SL1200_.jpg", class: "w-full h-full" %>
-        <% end %>
-        <%= link_to "https://read.amazon.ca/kp/embed?asin=B000SEFNMS&preview=newtab&linkCode=kpe&ref_=kip_embed_taf_preview_RVJTTYNGEFSAFFFJCP3D&tag=naamani00-20", target: "_blank" do %>
-          <%= image_tag "https://m.media-amazon.com/images/I/61A+LdmTESL._SL1200_.jpg", class: "w-full h-full" %>
-        <% end %>
-        <%= link_to "https://read.amazon.ca/kp/embed?asin=B09YY9W9B3&preview=newtab&linkCode=kpe&ref_=kip_embed_taf_preview_F7MYZW977K41ZESGZBJZ&tag=naamani00-20", target: "_blank" do %>
-          <%= image_tag "https://m.media-amazon.com/images/I/510-R80H69L._SL1500_.jpg", class: "w-full h-full" %>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <% [
+          ["https://read.amazon.ca/kp/embed?asin=B004BDOUAI&preview=newtab&linkCode=kpe&ref_=kip_embed_taf_preview_F2AFKCQ7YCFSJ5SJ4Y1N&tag=naamani00-20", "https://m.media-amazon.com/images/I/616BYPbOCyL._SL1500_.jpg"],
+          ["https://a.co/d/gcfDmne", "https://m.media-amazon.com/images/I/71HamifdtQL._SL1500_.jpg"],
+          ["https://read.amazon.ca/kp/embed?asin=B01MRLFFQ7&preview=newtab&linkCode=kpe&ref_=kip_embed_taf_preview_HBB6BWPETTRMHV2D81BH&tag=naamani00-20", "https://m.media-amazon.com/images/I/61ZScoZzPLL._SL1360_.jpg"],
+          ["https://read.amazon.ca/kp/embed?asin=B07H453KGH&preview=newtab&linkCode=kpe&ref_=kip_embed_taf_preview_Q5WB7BX2NF47EWTMZK68&tag=naamani00-20", "https://m.media-amazon.com/images/I/61pDNU9qEGL._SL1360_.jpg"],
+          ["https://read.amazon.ca/kp/embed?asin=B079WV79TK&preview=newtab&linkCode=kpe&ref_=kip_embed_taf_preview_4F3NJGAKQQMGJMZK20Z9&tag=naamani00-20", "https://m.media-amazon.com/images/I/81nvF-p7odL._SL1500_.jpg"],
+          ["https://read.amazon.ca/kp/embed?asin=B000FC1JAI&preview=newtab&linkCode=kpe&ref_=kip_embed_taf_preview_01JSSX62S4EXCDFQQ4BR&tag=naamani00-20", "https://m.media-amazon.com/images/I/512B-9yFgAL._SL1200_.jpg"],
+          ["https://read.amazon.ca/kp/embed?asin=B000SEFNMS&preview=newtab&linkCode=kpe&ref_=kip_embed_taf_preview_RVJTTYNGEFSAFFFJCP3D&tag=naamani00-20", "https://m.media-amazon.com/images/I/61A+LdmTESL._SL1200_.jpg"],
+          ["https://read.amazon.ca/kp/embed?asin=B09YY9W9B3&preview=newtab&linkCode=kpe&ref_=kip_embed_taf_preview_F7MYZW977K41ZESGZBJZ&tag=naamani00-20", "https://m.media-amazon.com/images/I/510-R80H69L._SL1500_.jpg"]
+        ].each do |link, image| %>
+          <div class="book-container group">
+            <%= link_to link, target: "_blank", class: "block h-full" do %>
+              <%= image_tag image, class: "book-image group-hover:scale-105 transition-transform duration-300" %>
+            <% end %>
+          </div>
         <% end %>
       </div>
     </div>

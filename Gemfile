@@ -19,8 +19,8 @@ gem "rack-attack"
 gem "rails", "~> 8.0.2"
 gem "redis"
 gem "stimulus-rails"
-gem "tailwindcss-rails", "~> 3.0.0"
-gem "tailwindcss-ruby", "~> 3.4.15"
+gem "tailwindcss-rails", "~> 4.0.0"
+gem "tailwindcss-ruby", "~> 4.0.0"
 gem "thruster", require: false
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[ windows jruby ]

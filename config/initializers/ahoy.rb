@@ -12,10 +12,10 @@ Ahoy.geocode = false
 # Track all blog posts and exclude assets/non-blog content
 Ahoy.exclude_method = lambda do |controller, request|
   # Skip if the path has a file extension (assets) or query parameters
-  return true if request.path.include?('.') || request.query_string.present?
+  return true if request.path.include?(".") || request.query_string.present?
 
   # Track all blog post URLs
-  if request.path.start_with?('/')
+  if request.path.start_with?("/")
     slug = request.path[1..] # Remove leading slash
     return false if Post.exists?(slug: slug) # Track if it's a blog post
   end

@@ -87,7 +87,7 @@ namespace :command do
       if visit.landing_page.present?
         uri = URI.parse(visit.landing_page)
         # Consider invalid if has file extension or query parameters
-        next true if uri.path.include?('.') || uri.query.present?
+        next true if uri.path.include?(".") || uri.query.present?
 
         # Check if it's a valid blog post
         slug = uri.path[1..] # Remove leading slash
