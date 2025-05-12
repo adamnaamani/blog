@@ -109,7 +109,7 @@
 
 @layer utilities {
   .btn {
-    @apply text-sm cursor-pointer bg-indigo-600 px-5 py-2.5 rounded-full font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600;
+    @apply text-sm cursor-pointer bg-indigo-600 px-5 py-2.5 rounded-full font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline  focus-visible:outline-offset-2 focus-visible:outline-indigo-600;
   }
   .static {
     @apply !shadow-none !outline-hidden !ring-0 !rounded-none !border-none !bg-transparent;
