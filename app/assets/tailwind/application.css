@@ -474,7 +474,7 @@ trix-editor .attachment__metadata {
     margin-left: 0.2em;
     white-space: nowrap; }
 
-.trix-content {
+/* .trix-content {
   line-height: 1.5;
   overflow-wrap: break-word;
   word-break: break-word; }
@@ -563,7 +563,8 @@ trix-editor .attachment__metadata {
   max-width: 50%; }
 .trix-content action-text-attachment .attachment {
   padding: 0 !important;
-  max-width: 100% !important; }
+  max-width: 100% !important; } */
+
 @media (prefers-color-scheme: dark) {
   trix-toolbar {
     background: rgb(55, 65, 81) !important;
