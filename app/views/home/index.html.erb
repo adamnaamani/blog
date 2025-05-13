@@ -14,9 +14,7 @@
   <main class="space-y-16">
     <section id="bio" class="prose max-w-none">
       <h1 class="sr-only">Adam Naamani - Real Estate Professional</h1>
-      <p class="bio-text text-slate-600 dark:text-slate-400">
-        Owner of <%= link_to "Naamani Real Estate", t("nre"), class: "link-primary" %>. Agent with <%= link_to "eXp Realty", t("exp"), class: "link-primary" %>. Entrepreneur specialized in <%= link_to "Proptech", t("github"), class: "link-primary" %>. Subscribe to my <%= link_to "newsletter", t('newsletter'), class: "link-primary" %> where you can follow my thinking on real estate, urbanism, tech, and business. Connect with me on <%= link_to "X", t("x"), class: "link-primary" %>, <%= link_to "Instagram", t("instagram"), class: "link-primary" %>, <%= link_to "LinkedIn", t("linkedin"), class: "link-primary" %>, and <%= link_to "Email", "mailto:#{t("email")}", data: { turbo: false }, class: "link-primary" %>.
-      </p>
+      <%= render "partials/bio" %>
     </section>
 
     <section id="projects" class="space-y-6">

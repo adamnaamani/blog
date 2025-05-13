@@ -1,0 +1,18 @@
+# EditorConfig helps maintain consistent coding styles
+# https://editorconfig.org/
+
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+[*.rb]
+quote_type = double
+
+[*.{js,jsx,ts,tsx}]
+quote_type = double

@@ -8,6 +8,7 @@ class SubscribersController < ApplicationController
 
     if subscriber.save
       label = "Subscribed! 🎉"
+      AdminMailer.new_subscriber(subscriber).deliver_now
     else
       label = subscriber.errors.full_messages.join(", ")
     end
