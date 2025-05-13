@@ -7,6 +7,7 @@ gem "ahoy_matey"
 gem "aws-sdk-s3", require: false
 gem "bootsnap", require: false
 gem "devise"
+gem "email_validator"
 gem "image_processing"
 gem "importmap-rails"
 gem "kamal", require: false

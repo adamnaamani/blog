@@ -4,11 +4,8 @@ class SubscribersController < ApplicationController
   def create
     return unless permitted_params[:email].present?
 
-    subscriber = Subscriber.new(permitted_params)
-
     if subscriber.save
       label = "Subscribed! 🎉"
-      AdminMailer.new_subscriber(subscriber).deliver_now
     else
       label = subscriber.errors.full_messages.join(", ")
     end
@@ -23,6 +20,14 @@ class SubscribersController < ApplicationController
   end
 
   private
+
+  def subscriber
+    @subscriber ||= Subscriber.new(permitted_params)
+  end
+
+  def send_admin_email(subscriber)
+    AdminMailer.new_subscriber(subscriber).deliver_now
+  end
 
   def permitted_params
     params.require(:subscriber).permit(:email)
