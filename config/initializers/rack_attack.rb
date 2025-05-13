@@ -45,7 +45,7 @@ class Rack::Attack
   end
 
   # Log blocked requests
-  self.blocklisted_response = lambda do |env|
+  self.blocklisted_responder = lambda do |env|
     [ 403, { "Content-Type" => "text/plain" }, ["Blocked\n"] ]
   end
 end
